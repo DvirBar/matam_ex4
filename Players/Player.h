@@ -21,8 +21,6 @@ public:
      * Constructor of Player Class
      *
      * @param name - Player's Name, made only with english characters, without spaces.
-     * @param maxHP - Player's Max Health Points.
-     * @param force - Player's Force Points.
      */
     explicit Player(const std::string& name);
 
@@ -52,6 +50,9 @@ public:
      * getLevel: Returns player's m_level parameter.
      */
     int getLevel() const;
+    
+    // TODO: Do we have another way to do it?
+    std::string getName() const;
 
     /**
      * buff: Increases the player's m_force Parameter with given amount.

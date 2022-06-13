@@ -1,0 +1,15 @@
+#include <string>
+
+#include "Treasure.h"
+#include "Card.h"
+#include "../Players/Player.h"
+#include "../utilities.h"
+
+Treasure::Treasure():
+    Card(TREASURE_CARD_NAME)
+{}
+
+void Treasure::applyEncounter(Player &player) const {
+    player.addCoins(TREASURE_LOOT);
+    printTreasureMessage();
+}
