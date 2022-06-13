@@ -1,1 +1,10 @@
 .DS_Store
+*.iml
+*.xml
+*.cmake
+*.bin
+*.exe
+cmake-build-debug/*
+*.check_cache
+*.log
+CMakeLists.txt
