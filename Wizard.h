@@ -9,9 +9,31 @@
 #include "utilities.h"
 #include <string>
 
+// --------------------------------------- Wizard Player Class --------------------------------------- //
+
 class Wizard : public Player {
-    Wizard(const std::string name, const int maxHP = DEFAULT_MAXHP, const int force = DEFAULT_FORCE);
-    void heal(int HPToHeal);
+    /**
+     * Constructor of Wizard Class.
+     *
+     * Sets the parameters of the Player class.
+     * @param name - name of the player
+     */
+    explicit Wizard(const std::string &name);
+
+    ~Wizard() override = default;
+
+    /**
+     * doubles the hp amount added to the Wizard.
+     *
+     * @param HPToHeal - Amount og HP to double
+     */
+    void heal(int HPToHeal) override;
+
+    /**
+     * Outputs Wizard's Parameters according to given structure
+     */
+    friend std::ostream& operator<<(std::ostream& output, Wizard& wizard);
+
 };
 
 #endif //MATAM_EX4_WIZARD_H

@@ -1,20 +1,38 @@
-//
-// Created by 222ro on 11-Jun-22.
-//
-
 #ifndef MATAM_EX4_ROGUE_H
 #define MATAM_EX4_ROGUE_H
 
 #include "Player.h"
 #include "utilities.h"
 #include <string>
+#include <iostream>
 
-//TODO: CHANGE PLAYER CONSTRUCTOR ACCORDING TO NEW RULES
+// --------------------------------------- Rogue Player Class --------------------------------------- //
+
 class Rogue : public Player {
 public:
-    Rogue(const std::string name, const int maxHP = DEFAULT_MAXHP, const int force = DEFAULT_FORCE);
-    ~Rogue() = default;
-    void addCoins(int coinsToAdd);
+    /**
+     * Constructor of Rogue Class.
+     *
+     * Sets the parameters of the Player class.
+     * @param name - name of the player
+     */
+    explicit Rogue(const std::string& name);
+
+    ~Rogue() override = default;
+
+    /**
+     * Adds to the Rogue double the coins that are received.
+     * @param coinsToAdd - coin amount to double before adding
+     */
+    void addCoins(int coinsToAdd) override;
+
+    /**
+     * Outputs Rogue's Parameters according to given structure
+     */
+    friend std::ostream& operator<<(std::ostream& output, Rogue& rogue);
+
+
+
 };
 
 #endif //MATAM_EX4_ROGUE_H

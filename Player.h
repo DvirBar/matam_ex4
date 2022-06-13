@@ -7,11 +7,13 @@
 
 #include <string>
 
-const int DEFAULT_MAXHP = 100;
-const int DEFAULT_FORCE = 5;
-const int MAX_LEVEL = 10;
+const int INIT_MAXHP = 100;
+const int INIT_FORCE = 5;
 const int INIT_LEVEL = 1;
-const int INIT_COINS = 0;
+const int INIT_COINS = 10;
+const int MAX_LEVEL = 10;
+
+// --------------------------------------- Player Class --------------------------------------- //
 
 class Player {
 public:
@@ -22,14 +24,14 @@ public:
      * @param maxHP - Player's Max Health Points.
      * @param force - Player's Force Points.
      */
-    explicit Player(const std::string name, const int maxHP = DEFAULT_MAXHP, const int force = DEFAULT_FORCE);
+    explicit Player(const std::string& name);
 
     /**
      * Copy Constructor of Player Class
      * Copies every parameter of given player object to "this" player object.
      * @param player - Player object to copy.
      */
-    Player(const Player &player);
+    Player(const Player& player);
 
     /**
      * Player Class Assignment Operator
@@ -38,12 +40,8 @@ public:
      * @return
      *      This Player object after assignment.
      */
-    Player &operator=(const Player &player);
+    Player& operator=(const Player& player);
 
-    /**
-     * printInfo: Prints the player's parameters.
-     */
-    void printInfo();
 
     /**
      * levelUp: adds 1 to a player's m_level parameter.
@@ -61,33 +59,33 @@ public:
      *
      * @param forceToBuff - Amount of force points to add.
      */
-    void buff(int forceToBuff);
+    virtual void buff(int forceToBuff);
 
     /**
      * heal: Increases the player's m_HP parameter with given amount, to a maximum of maxHP.
      * A player is unable to heal a negative number of HP. Function regards the negative number as 0.
      * @param HPToHeal - Amount of HP to add
      */
-    void heal(int HPToHeal);
+    virtual void heal(int HPToHeal);
 
     /**
      * damage: Decreases the player's m_HP parameter with given amount, to a minimum of 0 HP.
      * A Player is unable to damage a negative number of HP. Function regards the negative number as 0.
      * @param HPToDamage - Amount of HP to subtract
      */
-    void damage(int HPToDamage);
+    virtual void damage(int HPToDamage);
 
     /**
      * isKnockedOut: Returns true if player's m_HP parameter is 0, else false.
      */
-    bool isKnockedOut() const;
+    virtual bool isKnockedOut() const;
 
     /**
      * addCoins: Adds the given amount of coins to a player's m_coins parameter.
      * A player is unable to add a negative amount of coins. Function regards the negative number as 0.
      * @param coinsToAdd - Amount of coins to add.
      */
-    void addCoins(int coinsToAdd);
+    virtual void addCoins(int coinsToAdd);
 
     /**
      * pay: Subtracts the given amount of coins from a player's m_coins parameter.
@@ -98,17 +96,17 @@ public:
      *      true - Coins successfully subtracted from player's m_coins parameter
      *      false - An illegal transaction has occurred, player's m_coins parameter hasn't changed.
      */
-    bool pay(int coinsToPay);
+    virtual bool pay(int coinsToPay);
 
     /**
      * getAttackStrength: Returns player's Attack Strength.
      * Attack Strength is defined as sum of player's m_level and m_force parameters.
      */
-    int getAttackStrength() const;
+    virtual int getAttackStrength() const;
 
-    ~Player() = default;
+    virtual ~Player() = 0;
 
-private:
+protected:
     std::string m_name;
     int m_level;
     int m_force;

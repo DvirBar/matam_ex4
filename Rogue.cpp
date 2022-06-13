@@ -1,14 +1,14 @@
-//
-// Created by 222ro on 11-Jun-22.
-//
-
 #include "Rogue.h"
 
-Rogue::Rogue(const std::string name, const int maxHP, const int force) :
-    Player(name, maxHP, force)
+Rogue::Rogue(const std::string& name) : Player(name)
 { }
 
 void Rogue::addCoins(int coinsToAdd) {
     int doubleTheCoins = 2 * coinsToAdd;
     Player::addCoins(doubleTheCoins);
+}
+
+std::ostream& operator<<(std::ostream& output, Rogue& rogue) {
+    printPlayerDetails(output, rogue.m_name, "Rogue", rogue.m_level, rogue.m_force, rogue.m_HP, rogue.m_coins);
+    return output;
 }

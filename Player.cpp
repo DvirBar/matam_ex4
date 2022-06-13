@@ -3,30 +3,14 @@
 #include "utilities.h"
 
 
-Player::Player(const std::string name, const int maxHP, const int force) {
-    m_name = name;
-    m_level = INIT_LEVEL;
-
-    if (force < 0) {
-        m_force = DEFAULT_FORCE;
-    }
-
-    else {
-        m_force = force;
-    }
-
-    if (maxHP < 0) {
-        m_max_HP = DEFAULT_MAXHP;
-        m_HP = DEFAULT_MAXHP;
-    }
-
-    else {
-        m_max_HP = maxHP;
-        m_HP = maxHP;
-    }
-
-    m_coins = INIT_COINS;
-}
+Player::Player(const std::string& name) :
+    m_name(name),
+    m_level(INIT_LEVEL),
+    m_force(INIT_FORCE),
+    m_max_HP(INIT_MAXHP),
+    m_HP(INIT_MAXHP),
+    m_coins(INIT_COINS)
+{ }
 
 Player::Player(const Player& player):
         m_name(player.m_name),
@@ -52,11 +36,6 @@ Player& Player::operator=(const Player& player) {
 
     return *this;
 }
-
-//void Player::printInfo() {
-//    printPlayerInfo(m_name.c_str(), m_level, m_force, m_HP, m_coins);
-//}
-
 
 void Player::levelUp() {
     if (m_level == MAX_LEVEL) {
