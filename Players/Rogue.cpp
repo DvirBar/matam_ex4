@@ -1,7 +1,7 @@
 #include "Rogue.h"
 
 Rogue::Rogue(const std::string& name) : Player(name)
-{ }
+{}
 
 void Rogue::addCoins(int coinsToAdd) {
     int doubleTheCoins = 2 * coinsToAdd;

@@ -4,14 +4,14 @@
 #include "Card.h"
 #include "../Players/Player.h"
 
-const std::string TREASURE_CARD_NAME = "Treasure";
-const int TREASURE_LOOT = 10;
-
 class Treasure: public Card {
 public:
     Treasure();
     
     void applyEncounter(Player &player) const override;
+    
+    static const std::string CARD_NAME;
+    static const int CARD_LOOT;
 };
 
 #endif

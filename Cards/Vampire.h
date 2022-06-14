@@ -1,10 +1,3 @@
-//
-//  Vampire.h
-//  matam_ex4
-//
-//  Created by Dvir Bartov on 14/06/2022.
-//
-
 #ifndef Vampire_h
 #define Vampire_h
 
@@ -21,9 +14,14 @@ class Vampire: public Battle {
 public:
     Vampire();
     
+    void applyEncounter(Player &player) const override;
+    
     // TODO: constructors?
     Vampire(const Vampire& vampire) = default;
     ~Vampire() = default;
+    
+private:
+    static int FORCE_DAMAGE;
 };
 
 #endif /* Vampire_h */

@@ -14,6 +14,8 @@ class Dragon: public Battle {
 public:
     Dragon();
     
+    void applyEncounter(Player &player) const override;
+    
     // TODO: Constructors?
     Dragon(const Dragon& dragon) = default;
     ~Dragon() = default;

@@ -50,7 +50,7 @@ int Player::getLevel() const {
 }
 
 void Player::buff(int forceToBuff) {
-    if (forceToBuff < 0) {
+    if(m_force + forceToBuff < 0) {
         return;
     }
 

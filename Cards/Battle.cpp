@@ -5,32 +5,35 @@
 #include "../utilities.h"
 
 
+const std::string Battle::CARD_NAME;
+
+bool Battle::isWon(int attackStrength, int cardForce) {
+    return attackStrength >= cardForce;
+}
+
+void Battle::handleWin(Player &player, int coins, std::string name) {
+    player.levelUp();
+    player.addCoins(coins);
+    printWinBattle(player.getName(), name);
+}
+
+void Battle::handleLoss(Player &player, int damage, std::string name, bool killOnLoss) {
+    if(killOnLoss) {
+        player.damage(INIT_MAXHP);
+    }
+    
+    else {
+        player.damage(damage);
+    }
+    
+    printLossBattle(player.getName(), name);
+}
+
 Battle::Battle(std::string name, int force, int damageUponLoss, int coins, bool isDragon):
-    Card(BATTLE_CARD_NAME),
+    Card(Battle::CARD_NAME),
     m_name(name),
     m_force(force),
     m_damageUponLoss(damageUponLoss),
     m_coins(coins),
     m_isDragon(isDragon)
 {}
-
-void Battle::applyEncounter(Player &player) const {
-    if(player.getAttackStrength() >= m_force) {
-        player.levelUp();
-        player.addCoins(m_coins);
-        printWinBattle(player.getName(), m_name);
-    }
-    
-    else {
-        if(m_isDragon) {
-            // TODO: Should we do it like that?
-            player.damage(INIT_MAXHP);
-        }
-        
-        else {
-            player.damage(m_damageUponLoss);
-        }
-        
-        printLossBattle(player.getName(), m_name);
-    }
-}
