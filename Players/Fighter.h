@@ -1,23 +1,23 @@
-#ifndef MATAM_EX4_WARRIOR_H
-#define MATAM_EX4_WARRIOR_H
+#ifndef MATAM_EX4_FIGHTER_H
+#define MATAM_EX4_FIGHTER_H
 
 #include "Player.h"
-#include "utilities.h"
+#include "../utilities.h"
 #include <string>
 
 // --------------------------------------- Wizard Player Class --------------------------------------- //
 
-class Warrior : public Player {
+class Fighter : public Player {
 
     /**
-     * Constructor of Warrior Class.
+     * Constructor of Fighter Class.
      *
      * Sets the parameters of the Player class.
      * @param name - name of the player
      */
-    explicit Warrior(const std::string &name);
+    explicit Fighter(const std::string &name);
 
-    ~Warrior() override = default;
+    ~Fighter() override = default;
 
     /**
      * Calculates and the attack strength according to the formula: 2 * m_force + m_level.
@@ -26,10 +26,9 @@ class Warrior : public Player {
 
 
     /**
-    * Outputs Warrior's Parameters according to given structure
+    * Outputs Fighter's Parameters according to given structure
     */
-    friend std::ostream& operator<<(std::ostream& output, Warrior& warrior);
-
+    void printInfo(std::ostream &output) const override;
 };
 
-#endif //MATAM_EX4_WARRIOR_H
+#endif //MATAM_EX4_FIGHTER_H

@@ -8,8 +8,8 @@ void Wizard::heal(int HPToHeal) {
     Player::heal(doubleTheHP);
 }
 
-std::ostream& operator<<(std::ostream& output, Wizard& wizard) {
-    printPlayerDetails(output, wizard.m_name, "Wizard", wizard.m_level, wizard.m_force, wizard.m_HP, wizard.m_coins);
-    return output;
+void Wizard::printInfo(std::ostream &output) const {
+    printPlayerDetails(output, m_name, "Wizard", m_level, m_force, m_HP, m_coins);
 }
+
 

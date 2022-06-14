@@ -4,7 +4,7 @@
 #include <string>
 #include "Card.h"
 
-const std::string BATTLE_CARD_NAME = "Battle";
+static const std::string BATTLE_CARD_NAME = "Battle";
 
 class Battle: public Card {
 public:

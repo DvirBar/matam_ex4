@@ -8,7 +8,7 @@ void Rogue::addCoins(int coinsToAdd) {
     Player::addCoins(doubleTheCoins);
 }
 
-std::ostream& operator<<(std::ostream& output, Rogue& rogue) {
-    printPlayerDetails(output, rogue.m_name, "Rogue", rogue.m_level, rogue.m_force, rogue.m_HP, rogue.m_coins);
-    return output;
+void Rogue::printInfo(std::ostream &output) const {
+    printPlayerDetails(output, m_name, "Rogue", m_level, m_force, m_HP, m_coins);
 }
+

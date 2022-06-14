@@ -6,7 +6,7 @@
 #define MATAM_EX4_WIZARD_H
 
 #include "Player.h"
-#include "utilities.h"
+#include "../utilities.h"
 #include <string>
 
 // --------------------------------------- Wizard Player Class --------------------------------------- //
@@ -32,8 +32,7 @@ class Wizard : public Player {
     /**
      * Outputs Wizard's Parameters according to given structure
      */
-    friend std::ostream& operator<<(std::ostream& output, Wizard& wizard);
-
+    void printInfo(std::ostream &output) const override;
 };
 
 #endif //MATAM_EX4_WIZARD_H
