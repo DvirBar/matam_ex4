@@ -3,7 +3,7 @@
 #include "Battle.h"
 
 Goblin::Goblin():
-    Battle(NAME, FORCE, DAMAGE_UPON_LOSS, COINS, IS_DRAGON)
+    Battle(NAME, FORCE, DAMAGE_UPON_LOSS, COINS)
 {}
 
 void Goblin::applyEncounter(Player &player) const {

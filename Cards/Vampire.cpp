@@ -4,7 +4,7 @@
 int Vampire::FORCE_DAMAGE = 1;
 
 Vampire::Vampire():
-    Battle(NAME, FORCE, DAMAGE_UPON_LOSS, COINS, IS_DRAGON)
+    Battle(NAME, FORCE, DAMAGE_UPON_LOSS, COINS)
 {}
 
 void Vampire::applyEncounter(Player &player) const {

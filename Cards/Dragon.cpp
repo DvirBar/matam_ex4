@@ -3,7 +3,7 @@
 #include "Battle.h"
 
 Dragon::Dragon():
-    Battle(NAME, FORCE, DAMAGE_UPON_LOSS, COINS, IS_DRAGON)
+    Battle(NAME, FORCE, DAMAGE_UPON_LOSS, COINS)
 {}
 
 void Dragon::applyEncounter(Player &player) const {

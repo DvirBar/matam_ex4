@@ -7,7 +7,7 @@
 class Battle: public Card {
 public:
     // TODO: Should we init it with constructor or use fields and protected?
-    Battle(std::string name, int force, int damageUponLoss, int coins, bool isDragon);
+    Battle(std::string name, int force, int damageUponLoss, int coins);
     
     // TODO: Should I use pure virtual here for apply encounter
     
@@ -23,7 +23,6 @@ protected:
     int m_force;
     int m_damageUponLoss;
     int m_coins;
-    bool m_isDragon;
     
 private:
     static const std::string CARD_NAME;

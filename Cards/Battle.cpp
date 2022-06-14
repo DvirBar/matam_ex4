@@ -29,11 +29,10 @@ void Battle::handleLoss(Player &player, int damage, std::string name, bool killO
     printLossBattle(player.getName(), name);
 }
 
-Battle::Battle(std::string name, int force, int damageUponLoss, int coins, bool isDragon):
+Battle::Battle(std::string name, int force, int damageUponLoss, int coins):
     Card(Battle::CARD_NAME),
     m_name(name),
     m_force(force),
     m_damageUponLoss(damageUponLoss),
-    m_coins(coins),
-    m_isDragon(isDragon)
+    m_coins(coins)
 {}
