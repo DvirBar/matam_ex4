@@ -1,7 +1,7 @@
 #include <string>
 
 #include "Card.h"
-#include "utilities.h"
+#include "../utilities.h"
 
 
 Card::Card(std::string name):

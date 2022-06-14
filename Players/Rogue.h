@@ -2,7 +2,7 @@
 #define MATAM_EX4_ROGUE_H
 
 #include "Player.h"
-#include "utilities.h"
+#include "../utilities.h"
 #include <string>
 #include <iostream>
 
@@ -29,7 +29,7 @@ public:
     /**
      * Outputs Rogue's Parameters according to given structure
      */
-    friend std::ostream& operator<<(std::ostream& output, Rogue& rogue);
+    void printInfo(std::ostream &output) const override;
 
 
 
