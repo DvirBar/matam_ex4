@@ -7,8 +7,8 @@
 
 // --------------------------------------- Wizard Player Class --------------------------------------- //
 
-class Fighter : public Player {
-
+class Fighter: public Player {
+public:
     /**
      * Constructor of Fighter Class.
      *

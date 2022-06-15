@@ -11,7 +11,8 @@
 
 // --------------------------------------- Wizard Player Class --------------------------------------- //
 
-class Wizard : public Player {
+class Wizard: public Player {
+public:
     /**
      * Constructor of Wizard Class.
      *

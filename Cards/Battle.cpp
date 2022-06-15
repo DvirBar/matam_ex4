@@ -19,7 +19,7 @@ void Battle::handleWin(Player &player, int coins, std::string name) {
 
 void Battle::handleLoss(Player &player, int damage, std::string name, bool killOnLoss) {
     if(killOnLoss) {
-        player.damage(INIT_MAXHP);
+        player.killPlayer();
     }
     
     else {
@@ -27,6 +27,18 @@ void Battle::handleLoss(Player &player, int damage, std::string name, bool killO
     }
     
     printLossBattle(player.getName(), name);
+}
+
+int Battle::getForce() const {
+    return m_force;
+}
+
+int Battle::getDamageUponLoss() const {
+    return m_damageUponLoss;
+}
+
+int Battle::getCoins() const {
+    return m_coins;
 }
 
 Battle::Battle(std::string name, int force, int damageUponLoss, int coins):

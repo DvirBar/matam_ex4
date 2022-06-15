@@ -1,6 +1,15 @@
 #ifndef MTMCHKIN_H_
 #define MTMCHKIN_H_
 
+#include <memory>
+#include <vector>
+#include <string>
+#include <map>
+#include <fstream>
+
+#include "Cards/Card.h"
+#include "Players/Player.h"
+
 class Mtmchkin{
 
 public:
@@ -39,13 +48,31 @@ public:
     */
     bool isGameOver() const;
     
-	/*
+    /*
     *  Returns the number of rounds played.
     *
     *  @return
     *          int - number of rounds played
     */
     int getNumberOfRounds() const;
+    
+private:
+    std::deque<std::unique_ptr<Card>> deck;
+    std::deque<std::unique_ptr<Player>> playersQueue;
+    int roundCount;
+    
+    static void createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &deck,
+                           const std::map<std::string, std::unique_ptr<Card>> &cardMap);
+    
+    static std::unique_ptr<Player> choosePlayerByClass(std::string name, std::string playerClass);
+    static void createPlayersQueue(int teamSize, std::deque<std::unique_ptr<Player>> &playersQueue);
+    static bool validatePlayerName(std::string input, std::string &name);
+    static bool validateClassAndCreatePlayer(std::string input, std::string name, std::unique_ptr<Player> &player);
+    
+    static const std::map<std::string, std::unique_ptr<Card>> cardMap;
+//    static const std::map<std::string, std::unique_ptr<Player>> playersMap;
+    static const int TEAM_MIN_SIZE;
+    static const int TEAM_MAX_SIZE;
 };
 
 

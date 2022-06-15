@@ -11,6 +11,10 @@ public:
     
     // TODO: Should I use pure virtual here for apply encounter
     
+    int getForce() const;
+    int getDamageUponLoss() const;
+    int getCoins() const;
+    
     // TODO: Copy c'tor, =operator, destructor?
     Battle(const Battle& battle) = default;
     ~Battle() = default;
