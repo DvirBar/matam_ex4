@@ -25,6 +25,7 @@
 const int Mtmchkin::TEAM_MIN_SIZE = 2;
 const int Mtmchkin::TEAM_MAX_SIZE = 6;
 
+// TODO: should we use a shared_ptr or use 
 const std::map<std::string, std::unique_ptr<Card>> Mtmchkin::cardMap {
     { "Vampire", std::unique_ptr<Card>(new Vampire()) },
     { "Goblin", std::unique_ptr<Card>(new Goblin()) },
@@ -37,7 +38,7 @@ const std::map<std::string, std::unique_ptr<Card>> Mtmchkin::cardMap {
 };
 
 // TODO: Weird.
-std::unique_ptr<Player> Mtmchkin::choosePlayerByClass(std::string name, std::string playerClass) {
+ std::unique_ptr<Player>  Mtmchkin::choosePlayerByClass(std::string name, std::string playerClass) {
     if(playerClass == "Wizard") {
         return std::unique_ptr<Player>(new Wizard(name));
     }
@@ -53,8 +54,8 @@ std::unique_ptr<Player> Mtmchkin::choosePlayerByClass(std::string name, std::str
     throw InvalidPlayer();
 }
 
-// TODO: Is it good practive to give map as argument?
-void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &deck,
+// TODO: Is it good practice to give map as argument?
+void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &m_deck,
                           const std::map<std::string, std::unique_ptr<Card>> &cardMap) {
     std::string cardType;
     int deckSize = 0;
@@ -63,7 +64,7 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
         try {
             deckSize++;
             // TODO: std::move???
-            deck.push_back(cardMap.at(cardType));
+            m_deck.push_back(cardMap.at(cardType));
         }
         catch(const std::out_of_range& err) {
             // TODO: Do we need to free something here?
@@ -114,6 +115,7 @@ bool Mtmchkin::validateClassAndCreatePlayer(std::string input, std::string name,
 void Mtmchkin::createPlayersQueue(int teamSize, std::deque<std::unique_ptr<Player>> &playersQueue) {
     int index = 0;
     std::string input;
+    
     while(index < teamSize) {
         std::cin >> input;
         std::string name;
@@ -134,13 +136,33 @@ void Mtmchkin::createPlayersQueue(int teamSize, std::deque<std::unique_ptr<Playe
     }
 }
 
-Mtmchkin::Mtmchkin(const std::string filename) {
+void insertIntooLeaderboard(const std::unique_ptr<Player> &player, std::list<std::unique_ptr<Player>> &leaderboard) {
+    std::list<std::unique_ptr<Player>>::iterator iterator;
+    bool inserted = false;
+    
+    for(iterator = leaderboard.begin(); iterator != leaderboard.end(); ++iterator) {
+        Player* currentPlayer = iterator->get();
+        if(currentPlayer->getLevel() == Player::MAX_LEVEL) {
+            leaderboard.insert(iterator, player);
+            inserted = true;
+        }
+    }
+    
+    if(!inserted) {
+        leaderboard.insert(leaderboard.end(), player);
+    }
+}
+
+Mtmchkin::Mtmchkin(const std::string filename):
+    m_numberOfRounds(0),
+    m_gameOver(false)
+{
     std::ifstream deckFile(filename);
     if(!deckFile) {
         throw DeckFileNotFound();
     }
     
-    createDeck(deckFile, Mtmchkin::deck, Mtmchkin::cardMap);
+    createDeck(deckFile, Mtmchkin::m_deck, Mtmchkin::cardMap);
     
     printStartGameMessage();
     printEnterTeamSizeMessage();
@@ -153,21 +175,73 @@ Mtmchkin::Mtmchkin(const std::string filename) {
         printInvalidTeamSize();
         std::cin >> teamSize;
     }
-    
-    createPlayersQueue(teamSize, Mtmchkin::playersQueue);
-    Mtmchkin::roundCount = 0;
+
+    createPlayersQueue(teamSize, Mtmchkin::m_playersQueue);
 }
 
 void Mtmchkin::playRound() {
-    printRoundStartMessage(Mtmchkin::roundCount);
-    // TODO: Leaderboard
-    // TODO: Manage win-loss
-    for(std::unique_ptr<Player> &currentPlayer : Mtmchkin::playersQueue) {
+    printRoundStartMessage(m_numberOfRounds);
+    
+    int playersPlayed = 0;
+    int originalQueueSize = (int)m_playersQueue.size();
+    
+    while(playersPlayed < originalQueueSize) {
+        const std::unique_ptr<Player> currentPlayer = std::move(m_playersQueue.front());
+        m_playersQueue.pop_front();
+        
         printTurnStartMessage(currentPlayer->getName());
-        const std::unique_ptr<Card> currentCard = std::move(Mtmchkin::deck.front());
-        deck.pop_front();
+        
+        const std::unique_ptr<Card> currentCard = std::move(m_deck.front());
+        m_deck.pop_front();
+        
         currentCard->applyEncounter(*currentPlayer);
-        deck.push_back(currentCard);
+        
+        if(currentPlayer->getLevel() == Player::MAX_LEVEL || currentPlayer->isKnockedOut()) {
+            insertIntoLeaderboard(currentPlayer, m_leaderboard);
+        }
+        
+        else {
+            m_playersQueue.push_back(currentPlayer);
+        }
+        
+        m_deck.push_back(currentCard);
+        playersPlayed++;
+    }
+    
+    m_numberOfRounds++;
+    
+    if(m_playersQueue.size() == 0) {
+        m_gameOver = true;
+    }
+}
+
+int Mtmchkin::getNumberOfRounds() const {
+    return m_numberOfRounds;
+}
+
+bool Mtmchkin::isGameOver() const {
+    return m_gameOver;
+}
+
+void Mtmchkin::printLeaderBoard() const {
+    printLeaderBoardStartMessage();
+    int ranking = 1;
+    // TODO: Figure this const_iterator thing out
+    std::list<std::unique_ptr<Player>>::const_iterator leaderboardIterator;
+
+    for(leaderboardIterator = m_leaderboard.begin(); leaderboardIterator->get()->getLevel() == Player::MAX_LEVEL; leaderboardIterator++) {
+        printPlayerLeaderBoard(ranking, *(leaderboardIterator->get()));
+        ranking++;
+    }
+    
+    for(const std::unique_ptr<Player> &currentPlayer : m_playersQueue) {
+        printPlayerLeaderBoard(ranking, *currentPlayer);
+        ranking++;
+    }
+    
+    for(; leaderboardIterator != m_leaderboard.end(); leaderboardIterator++) {
+        printPlayerLeaderBoard(ranking, *(leaderboardIterator->get()));
+        ranking++;
     }
 }
 

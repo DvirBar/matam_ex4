@@ -2,7 +2,7 @@
 #define MTMCHKIN_H_
 
 #include <memory>
-#include <vector>
+#include <list>
 #include <string>
 #include <map>
 #include <fstream>
@@ -57,9 +57,11 @@ public:
     int getNumberOfRounds() const;
     
 private:
-    std::deque<std::unique_ptr<Card>> deck;
-    std::deque<std::unique_ptr<Player>> playersQueue;
-    int roundCount;
+    std::deque<std::unique_ptr<Card>> m_deck;
+    std::deque<std::unique_ptr<Player>> m_playersQueue;
+    std::list<std::unique_ptr<Player>> m_leaderboard;
+    int m_numberOfRounds;
+    bool m_gameOver;
     
     static void createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &deck,
                            const std::map<std::string, std::unique_ptr<Card>> &cardMap);
@@ -68,6 +70,7 @@ private:
     static void createPlayersQueue(int teamSize, std::deque<std::unique_ptr<Player>> &playersQueue);
     static bool validatePlayerName(std::string input, std::string &name);
     static bool validateClassAndCreatePlayer(std::string input, std::string name, std::unique_ptr<Player> &player);
+    static void insertIntoLeaderboard(const std::unique_ptr<Player> &player, std::list<std::unique_ptr<Player>> &leaderBoard);
     
     static const std::map<std::string, std::unique_ptr<Card>> cardMap;
 //    static const std::map<std::string, std::unique_ptr<Player>> playersMap;

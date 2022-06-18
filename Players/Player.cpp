@@ -1,6 +1,9 @@
 #include <string>
 #include "Player.h"
 
+const int Player::MAX_LEVEL = 10;
+const int Player::MIN_FORCE = 0;
+
 Player::Player(const std::string& name) :
     m_name(name),
     m_level(INIT_LEVEL),
@@ -8,7 +11,7 @@ Player::Player(const std::string& name) :
     m_max_HP(INIT_MAXHP),
     m_HP(INIT_MAXHP),
     m_coins(INIT_COINS)
-{ }
+{}
 
 //Player::Player(const Player& player):
 //        m_name(player.m_name),
