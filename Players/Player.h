@@ -110,8 +110,12 @@ public:
     void killPlayer();
 
     virtual void printInfo(std::ostream& output) const = 0;
-
+    
+    // TODO: Why?
     virtual ~Player() = 0;
+    
+    static const int MAX_LEVEL;
+    static const int MIN_FORCE;
 
 protected:
     std::string m_name;
@@ -122,6 +126,7 @@ protected:
     int m_coins;
 
 friend std::ostream& operator<<(std::ostream& output, const Player& player);
+    
 };
 
 #endif // HW2_PLAYER_H

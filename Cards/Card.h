@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <string>
-#include "../Players/Player.h"
 
+#include "../Players/Player.h"
 
 class Card
 {
@@ -37,7 +37,6 @@ public:
     Card(const Card &) = default;
     ~Card() = default;
     Card &operator=(const Card &other) = default;
-
 private:
     std::string m_name;
     

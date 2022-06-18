@@ -1,7 +1,7 @@
 #include "Fairy.h"
 
 Fairy::Fairy() : Card(FAIRY_NAME)
-{ }
+{}
 
 void Fairy::applyEncounter(Player &player) const {
     Wizard* wizardCheck = dynamic_cast<Wizard*>(&player);
@@ -13,4 +13,3 @@ void Fairy::applyEncounter(Player &player) const {
         printFairyMessage(false);
     }
 }
-
