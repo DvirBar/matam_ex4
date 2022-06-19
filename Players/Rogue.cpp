@@ -1,4 +1,7 @@
 #include "Rogue.h"
+#include "../utilities.h"
+
+const std::string JOB_NAME = "Rogue";
 
 Rogue::Rogue(const std::string& name) : Player(name)
 {}
@@ -9,6 +12,6 @@ void Rogue::addCoins(int coinsToAdd) {
 }
 
 void Rogue::printInfo(std::ostream &output) const {
-    printPlayerDetails(output, m_name, "Rogue", m_level, m_force, m_HP, m_coins);
+    printPlayerDetails(output, m_name, JOB_NAME, m_level, m_force, m_HP, m_coins);
 }
 

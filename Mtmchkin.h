@@ -59,23 +59,26 @@ public:
 private:
     std::deque<std::unique_ptr<Card>> m_deck;
     std::deque<std::unique_ptr<Player>> m_playersQueue;
-    std::list<std::unique_ptr<Player>> m_leaderboard;
+    std::deque<std::unique_ptr<Player>> m_playersWon;
+    std::deque<std::unique_ptr<Player>> m_playersLost;
     int m_numberOfRounds;
     bool m_gameOver;
     
     static void createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &deck,
-                           const std::map<std::string, std::unique_ptr<Card>> &cardMap);
+                           std::map<std::string, std::unique_ptr<Card>> &cardMap);
     
-    static std::unique_ptr<Player> choosePlayerByClass(std::string name, std::string playerClass);
+    static std::unique_ptr<Card> chooseCardByType(std::string &cardType, int deckSize);
+    static std::unique_ptr<Player> choosePlayerByClass(std::string &name, std::string &playerClass);
     static void createPlayersQueue(int teamSize, std::deque<std::unique_ptr<Player>> &playersQueue);
-    static bool validatePlayerName(std::string input, std::string &name);
+    static bool validatePlayerName(std::string &input, std::string &name);
     static bool validateClassAndCreatePlayer(std::string input, std::string name, std::unique_ptr<Player> &player);
-    static void insertIntoLeaderboard(const std::unique_ptr<Player> &player, std::list<std::unique_ptr<Player>> &leaderBoard);
+    static void insertIntoLeaderboard(std::unique_ptr<Player> &player, std::deque<std::unique_ptr<Player>> &playersWon,
+                                      std::deque<std::unique_ptr<Player>> &playersLost);
     
-    static const std::map<std::string, std::unique_ptr<Card>> cardMap;
+    static std::map<std::string, std::unique_ptr<Card>> CARD_MAP;
 //    static const std::map<std::string, std::unique_ptr<Player>> playersMap;
-    static const int TEAM_MIN_SIZE;
-    static const int TEAM_MAX_SIZE;
+    static const int TEAM_MIN_SIZE = 2;
+    static const int TEAM_MAX_SIZE = 6; 
 };
 
 

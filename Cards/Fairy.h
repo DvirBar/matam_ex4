@@ -9,9 +9,6 @@
 
 // --------------------------------------- Fairy Card Class --------------------------------------- //
 
-static const std::string FAIRY_NAME = "Fairy";
-static const int FAIRY_HEAL = 10;
-
 class Fairy : public Card {
 public:
 
@@ -24,6 +21,9 @@ public:
      * Heals 10 HP for A WIZARD ONLY.
      */
     void applyEncounter(Player &player) const override;
+    
+    static const std::string CARD_NAME;
+    static const int HEAL = 10;
 };
 
 #endif //MATAM_EX4_FAIRY_H

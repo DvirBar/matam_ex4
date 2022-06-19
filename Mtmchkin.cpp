@@ -22,54 +22,81 @@
 #include "Players/Rogue.h"
 #include "Players/Fighter.h"
 
-const int Mtmchkin::TEAM_MIN_SIZE = 2;
-const int Mtmchkin::TEAM_MAX_SIZE = 6;
+// TODO: should we use a shared_ptr or use
+//std::map<std::string, std::unique_ptr<Card>> Mtmchkin::CARD_MAP {
+//    { "Vampire", std::unique_ptr<Card>(new Vampire()) },
+//    { "Goblin", std::unique_ptr<Card>(new Goblin()) },
+//    { "Dragon", std::unique_ptr<Card>(new Dragon()) },
+//    { "Treasure", std::unique_ptr<Card>(new Treasure()) },
+//    { "Merchant", std::unique_ptr<Card>(new Merchant()) },
+//    { "Fairy", std::unique_ptr<Card>(new Fairy()) },
+//    { "Pitfall", std::unique_ptr<Card>(new Pitfall()) },
+//    { "Barfight", std::unique_ptr<Card>(new Barfight()) },
+//};
 
-// TODO: should we use a shared_ptr or use 
-const std::map<std::string, std::unique_ptr<Card>> Mtmchkin::cardMap {
-    { "Vampire", std::unique_ptr<Card>(new Vampire()) },
-    { "Goblin", std::unique_ptr<Card>(new Goblin()) },
-    { "Dragon", std::unique_ptr<Card>(new Dragon()) },
-    { "Treasure", std::unique_ptr<Card>(new Treasure()) },
-    { "Merchant", std::unique_ptr<Card>(new Merchant()) },
-    { "Fairy", std::unique_ptr<Card>(new Fairy()) },
-    { "Pitfall", std::unique_ptr<Card>(new Pitfall()) },
-    { "Barfight", std::unique_ptr<Card>(new Barfight()) },
-};
+std::unique_ptr<Card> Mtmchkin::chooseCardByType(std::string &cardType, int deckSize) {
+    if(cardType == "Vampire") {
+        return std::unique_ptr<Card>(new Vampire());
+    }
 
-// TODO: Weird.
- std::unique_ptr<Player>  Mtmchkin::choosePlayerByClass(std::string name, std::string playerClass) {
+    if(cardType == "Goblin") {
+        return std::unique_ptr<Card>(new Goblin());
+    }
+
+    if(cardType == "Dragon") {
+        return std::unique_ptr<Card>(new Dragon());
+    }
+
+    if(cardType == "Treasure") {
+        return std::unique_ptr<Card>(new Treasure());
+    }
+
+    if(cardType == "Merchant") {
+        return std::unique_ptr<Card>(new Merchant());
+    }
+
+    if(cardType == "Fairy") {
+        return std::unique_ptr<Card>(new Fairy());
+    }
+
+    if(cardType == "Pitfall") {
+        return std::unique_ptr<Card>(new Pitfall());
+    }
+
+    if(cardType == "Barfight") {
+        return std::unique_ptr<Card>(new Barfight());
+    }
+
+    throw DeckFileFormatError(deckSize);
+}
+
+// TODO: Could this be done with map?
+ std::unique_ptr<Player> Mtmchkin::choosePlayerByClass(std::string &name, std::string &playerClass) {
     if(playerClass == "Wizard") {
         return std::unique_ptr<Player>(new Wizard(name));
     }
     
-    else if(playerClass == "Rogue") {
+    if(playerClass == "Rogue") {
         return std::unique_ptr<Player>(new Rogue(name));
     }
     
-    else if(playerClass == "Fighter") {
+    if(playerClass == "Fighter") {
         return std::unique_ptr<Player>(new Fighter(name));
     }
     
     throw InvalidPlayer();
 }
 
-// TODO: Is it good practice to give map as argument?
 void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &m_deck,
-                          const std::map<std::string, std::unique_ptr<Card>> &cardMap) {
+                          std::map<std::string, std::unique_ptr<Card>> &cardMap) {
     std::string cardType;
+    std::unique_ptr<Card> newCard;
     int deckSize = 0;
     
     while(std::getline(deckFile, cardType)) {
-        try {
-            deckSize++;
-            // TODO: std::move???
-            m_deck.push_back(cardMap.at(cardType));
-        }
-        catch(const std::out_of_range& err) {
-            // TODO: Do we need to free something here?
-            throw DeckFileFormatError(deckSize);
-        }
+        deckSize++;
+        newCard = chooseCardByType(cardType, deckSize);
+        m_deck.push_back(std::move(newCard));
     }
     
     if(deckSize < 5) {
@@ -77,9 +104,9 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
     }
 }
 
-bool Mtmchkin::validatePlayerName(std::string input, std::string &name) {
+bool Mtmchkin::validatePlayerName(std::string &input, std::string &name) {
     char currentChar;
-    for(int i; i < input.size(); i++) {
+    for(int i = 0; i < input.size(); i++) {
         currentChar = input[i];
         if(currentChar == ' ') {
             break;
@@ -131,26 +158,21 @@ void Mtmchkin::createPlayersQueue(int teamSize, std::deque<std::unique_ptr<Playe
             continue;
         }
         
-        playersQueue.push_back(player);
+        playersQueue.push_back(std::move(player));
         index++;
     }
 }
 
-void insertIntooLeaderboard(const std::unique_ptr<Player> &player, std::list<std::unique_ptr<Player>> &leaderboard) {
-    std::list<std::unique_ptr<Player>>::iterator iterator;
-    bool inserted = false;
-    
-    for(iterator = leaderboard.begin(); iterator != leaderboard.end(); ++iterator) {
-        Player* currentPlayer = iterator->get();
-        if(currentPlayer->getLevel() == Player::MAX_LEVEL) {
-            leaderboard.insert(iterator, player);
-            inserted = true;
-        }
+void Mtmchkin::insertIntoLeaderboard(std::unique_ptr<Player> &player, std::deque<std::unique_ptr<Player>> &playersWon,
+                                     std::deque<std::unique_ptr<Player>> &playersLost) {
+    if(player->getLevel() == Player::MAX_LEVEL) {
+        playersWon.push_back(std::move(player));
     }
     
-    if(!inserted) {
-        leaderboard.insert(leaderboard.end(), player);
+    else if(player->isKnockedOut()) {
+        playersLost.push_front(std::move(player));
     }
+
 }
 
 Mtmchkin::Mtmchkin(const std::string filename):
@@ -162,7 +184,7 @@ Mtmchkin::Mtmchkin(const std::string filename):
         throw DeckFileNotFound();
     }
     
-    createDeck(deckFile, Mtmchkin::m_deck, Mtmchkin::cardMap);
+    createDeck(deckFile, m_deck, CARD_MAP);
     
     printStartGameMessage();
     printEnterTeamSizeMessage();
@@ -171,6 +193,7 @@ Mtmchkin::Mtmchkin(const std::string filename):
     
     // TODO: Could it be more compact?
     std::cin >> teamSize;
+
     while (teamSize < Mtmchkin::TEAM_MIN_SIZE || teamSize > Mtmchkin::TEAM_MAX_SIZE) {
         printInvalidTeamSize();
         std::cin >> teamSize;
@@ -186,25 +209,25 @@ void Mtmchkin::playRound() {
     int originalQueueSize = (int)m_playersQueue.size();
     
     while(playersPlayed < originalQueueSize) {
-        const std::unique_ptr<Player> currentPlayer = std::move(m_playersQueue.front());
+        std::unique_ptr<Player> currentPlayer = std::move(m_playersQueue.front());
         m_playersQueue.pop_front();
         
         printTurnStartMessage(currentPlayer->getName());
         
-        const std::unique_ptr<Card> currentCard = std::move(m_deck.front());
+        std::unique_ptr<Card> currentCard = std::move(m_deck.front());
         m_deck.pop_front();
         
         currentCard->applyEncounter(*currentPlayer);
         
         if(currentPlayer->getLevel() == Player::MAX_LEVEL || currentPlayer->isKnockedOut()) {
-            insertIntoLeaderboard(currentPlayer, m_leaderboard);
+            insertIntoLeaderboard(currentPlayer, m_playersWon, m_playersLost);
         }
         
         else {
-            m_playersQueue.push_back(currentPlayer);
+            m_playersQueue.push_back(std::move(currentPlayer));
         }
         
-        m_deck.push_back(currentCard);
+        m_deck.push_back(std::move(currentCard));
         playersPlayed++;
     }
     
@@ -226,11 +249,9 @@ bool Mtmchkin::isGameOver() const {
 void Mtmchkin::printLeaderBoard() const {
     printLeaderBoardStartMessage();
     int ranking = 1;
-    // TODO: Figure this const_iterator thing out
-    std::list<std::unique_ptr<Player>>::const_iterator leaderboardIterator;
 
-    for(leaderboardIterator = m_leaderboard.begin(); leaderboardIterator->get()->getLevel() == Player::MAX_LEVEL; leaderboardIterator++) {
-        printPlayerLeaderBoard(ranking, *(leaderboardIterator->get()));
+    for(const std::unique_ptr<Player> &currentPlayer : m_playersWon) {
+        printPlayerLeaderBoard(ranking, *currentPlayer);
         ranking++;
     }
     
@@ -239,8 +260,8 @@ void Mtmchkin::printLeaderBoard() const {
         ranking++;
     }
     
-    for(; leaderboardIterator != m_leaderboard.end(); leaderboardIterator++) {
-        printPlayerLeaderBoard(ranking, *(leaderboardIterator->get()));
+    for(const std::unique_ptr<Player> &currentPlayer : m_playersLost) {
+        printPlayerLeaderBoard(ranking, *currentPlayer);
         ranking++;
     }
 }

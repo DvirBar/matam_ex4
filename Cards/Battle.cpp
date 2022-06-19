@@ -5,15 +5,23 @@
 #include "../utilities.h"
 
 
-const std::string Battle::CARD_NAME;
+const std::string Battle::CARD_NAME = "Battle";
+
+Battle::Battle(std::string name, int force, int damageUponLoss, int loot):
+    Card(CARD_NAME),
+    m_name(name),
+    m_force(force),
+    m_damageUponLoss(damageUponLoss),
+    m_loot(loot)
+{}
 
 bool Battle::isWon(int attackStrength, int cardForce) {
     return attackStrength >= cardForce;
 }
 
-void Battle::handleWin(Player &player, int coins, std::string name) {
+void Battle::handleWin(Player &player, int loot, std::string name) {
     player.levelUp();
-    player.addCoins(coins);
+    player.addCoins(loot);
     printWinBattle(player.getName(), name);
 }
 
@@ -38,13 +46,7 @@ int Battle::getDamageUponLoss() const {
 }
 
 int Battle::getCoins() const {
-    return m_coins;
+    return m_loot;
 }
 
-Battle::Battle(std::string name, int force, int damageUponLoss, int coins):
-    Card(Battle::CARD_NAME),
-    m_name(name),
-    m_force(force),
-    m_damageUponLoss(damageUponLoss),
-    m_coins(coins)
-{}
+

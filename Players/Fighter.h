@@ -29,6 +29,8 @@ public:
     * Outputs Fighter's Parameters according to given structure
     */
     void printInfo(std::ostream &output) const override;
+    
+    static const std::string JOB_NAME;
 };
 
 #endif //MATAM_EX4_FIGHTER_H

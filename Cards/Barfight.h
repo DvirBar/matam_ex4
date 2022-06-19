@@ -9,9 +9,6 @@
 
 // --------------------------------------- Barfight Card Class --------------------------------------- //
 
-static const std::string BARFIGHT_NAME = "Barfight";
-static const int BARFIGHT_DAMAGE = 10;
-
 class Barfight : public Card {
 public:
     /**
@@ -25,6 +22,9 @@ public:
      *     if the player is a fighter, the player will not get damage.
      */
     void applyEncounter(Player &player) const override;
+    
+    static const std::string CARD_NAME;
+    static const int DAMAGE = 10;
 };
 
 

@@ -4,10 +4,7 @@
 #include <string>
 #include "Battle.h"
 
-const std::string NAME = "Vampire";
-const int FORCE = 10;
-const int DAMAGE_UPON_LOSS = 10;
-const int COINS = 2;
+
 
 class Vampire: public Battle {
 public:
@@ -19,8 +16,11 @@ public:
     Vampire(const Vampire& vampire) = default;
     ~Vampire() = default;
     
-private:
-    static int FORCE_DAMAGE;
+    static const std::string CARD_NAME;
+    static const int FORCE = 10;
+    static const int DAMAGE_UPON_LOSS = 10;
+    static const int LOOT = 2;
+    static const int FORCE_DAMAGE = 1;
 };
 
 #endif

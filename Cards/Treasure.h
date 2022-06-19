@@ -11,7 +11,7 @@ public:
     void applyEncounter(Player &player) const override;
     
     static const std::string CARD_NAME;
-    static const int CARD_LOOT;
+    static const int CARD_LOOT = 10;
 };
 
 #endif

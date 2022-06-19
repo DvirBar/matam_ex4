@@ -1,5 +1,7 @@
 #include "Wizard.h"
 
+const std::string JOB_NAME = "Wizard";
+
 Wizard::Wizard(const std::string &name): Player(name)
 {}
 
@@ -9,7 +11,7 @@ void Wizard::heal(int HPToHeal) {
 }
 
 void Wizard::printInfo(std::ostream &output) const {
-    printPlayerDetails(output, m_name, "Wizard", m_level, m_force, m_HP, m_coins);
+    printPlayerDetails(output, m_name, JOB_NAME, m_level, m_force, m_HP, m_coins);
 }
 
 

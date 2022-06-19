@@ -7,13 +7,8 @@
 
 #include <string>
 
-const int INIT_MAXHP = 100;
-const int INIT_FORCE = 5;
-const int INIT_LEVEL = 1;
-const int INIT_COINS = 10;
-const int MAX_LEVEL = 10;
-
 // --------------------------------------- Player Class --------------------------------------- //
+
 
 class Player {
 public:
@@ -78,6 +73,7 @@ public:
      */
     virtual void damage(int HPToDamage);
 
+    // TODO: Why is it virtual
     /**
      * isKnockedOut: Returns true if player's m_HP parameter is 0, else false.
      */
@@ -110,12 +106,14 @@ public:
     void killPlayer();
 
     virtual void printInfo(std::ostream& output) const = 0;
-    
-    // TODO: Why?
+   
     virtual ~Player() = 0;
     
-    static const int MAX_LEVEL;
-    static const int MIN_FORCE;
+    static const int INIT_MAXHP = 100;
+    static const int INIT_FORCE = 5;
+    static const int INIT_LEVEL = 1;
+    static const int INIT_COINS = 10;
+    static const int MAX_LEVEL = 10;
 
 protected:
     std::string m_name;

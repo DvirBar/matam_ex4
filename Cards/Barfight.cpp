@@ -1,7 +1,8 @@
 #include "Barfight.h"
 
-Barfight::Barfight() : Card(BARFIGHT_NAME)
-{ }
+const std::string CARD_NAME = "Barfight";
+Barfight::Barfight() : Card(CARD_NAME)
+{}
 
 void Barfight::applyEncounter(Player &player) const {
     Fighter* fighterCheck = dynamic_cast<Fighter*>(&player);
@@ -9,7 +10,7 @@ void Barfight::applyEncounter(Player &player) const {
         printBarfightMessage(true);
     }
     else {
-        player.damage(BARFIGHT_DAMAGE);
+        player.damage(DAMAGE);
         printBarfightMessage(false);
     }
 }

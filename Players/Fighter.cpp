@@ -3,6 +3,8 @@
 //
 #include "Fighter.h"
 
+const std::string JOB_NAME = "Fighter";
+
 Fighter::Fighter(const std::string &name): Player(name)
 {}
 
@@ -11,7 +13,7 @@ int Fighter::getAttackStrength() const {
 }
 
 void Fighter::printInfo(std::ostream &output) const {
-    printPlayerDetails(output, m_name, "Fighter", m_level, m_force, m_HP, m_coins);
+    printPlayerDetails(output, m_name, JOB_NAME, m_level, m_force, m_HP, m_coins);
 }
 
 

@@ -1,9 +1,6 @@
 #include <string>
 #include "Player.h"
 
-const int Player::MAX_LEVEL = 10;
-const int Player::MIN_FORCE = 0;
-
 Player::Player(const std::string& name) :
     m_name(name),
     m_level(INIT_LEVEL),

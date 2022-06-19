@@ -8,15 +8,6 @@
 
 // --------------------------------------- Merchant Card Class --------------------------------------- //
 
-static const std::string MERCHANT_NAME = "Merchant";
-static const int HEALTH_POTION_OPTION = 1;
-static const int FORCE_BOOST_OPTION = 2;
-static const int LEAVE_OPTION = 0;
-static const int HEALTH_POTION_COST = 5;
-static const int FORCE_BOOST_COST = 10;
-static const int HEALTH_TO_BOOST = 1;
-static const int FORCE_TO_BOOST = 1;
-
 class Merchant : public Card {
 public:
     /**
@@ -32,6 +23,15 @@ public:
      *      If A player has insufficient funds, no action will be taken and the turn will end.
      */
     void applyEncounter(Player &player) const override;
+    
+    static const std::string MERCHANT_NAME;
+    static const int HEALTH_POTION_OPTION = 1;
+    static const int FORCE_BOOST_OPTION = 2;
+    static const int LEAVE_OPTION = 0;
+    static const int HEALTH_POTION_COST = 5;
+    static const int FORCE_BOOST_COST = 10;
+    static const int HEALTH_TO_BOOST = 1;
+    static const int FORCE_TO_BOOST = 1;
 };
 
 #endif //MATAM_EX4_MERCHANT_H

@@ -35,7 +35,7 @@ public:
      * Here we are explicitly telling the compiler to use the default methods
      */
     Card(const Card &) = default;
-    ~Card() = default;
+    virtual ~Card();
     Card &operator=(const Card &other) = default;
 private:
     std::string m_name;

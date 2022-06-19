@@ -9,9 +9,6 @@
 
 // --------------------------------------- Pitfall Card Class --------------------------------------- //
 
-static const std::string PITFALL_NAME = "Pitfall";
-static const int PITFALL_DAMAGE = 10;
-
 class Pitfall : public Card {
 public:
     /**
@@ -25,6 +22,8 @@ public:
      *     If the player is a rogue, the player will get no damage.
      */
     void applyEncounter(Player &player) const override;
+    static const std::string CARD_NAME;
+    static const int DAMAGE = 10;
 };
 
 #endif //MATAM_EX4_PITFALL_H

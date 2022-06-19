@@ -1,12 +1,15 @@
 #include "Fairy.h"
 
-Fairy::Fairy() : Card(FAIRY_NAME)
+
+const std::string CARD_NAME = "Fairy";
+
+Fairy::Fairy() : Card(CARD_NAME)
 {}
 
 void Fairy::applyEncounter(Player &player) const {
     Wizard* wizardCheck = dynamic_cast<Wizard*>(&player);
     if(wizardCheck != nullptr) {
-        player.heal(FAIRY_HEAL);
+        player.heal(HEAL);
         printFairyMessage(true);
     }
     else {

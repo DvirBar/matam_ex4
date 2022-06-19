@@ -3,13 +3,6 @@
 
 #include "Battle.h"
 
-
-// TODO: Should we define these as static?
-const std::string NAME = "Goblin";
-const int FORCE = 6;
-const int DAMAGE_UPON_LOSS = 10;
-const int COINS = 2;
-
 class Goblin: public Battle {
 public:
     Goblin();
@@ -19,6 +12,11 @@ public:
     // TODO: Constructors?
     Goblin(const Goblin& goblin) = default;
     ~Goblin() = default;
+    
+    static const std::string CARD_NAME;
+    static const int FORCE = 6;
+    static const int DAMAGE_UPON_LOSS = 10;
+    static const int LOOT = 2;
 };
 
 #endif

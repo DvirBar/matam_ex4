@@ -2,13 +2,15 @@
 #include "Dragon.h"
 #include "Battle.h"
 
+const std::string CARD_NAME = "Dragon";
+
 Dragon::Dragon():
-    Battle(NAME, FORCE, DAMAGE_UPON_LOSS, COINS)
+    Battle(CARD_NAME, FORCE, DAMAGE_UPON_LOSS, COINS)
 {}
 
 void Dragon::applyEncounter(Player &player) const {
     if(Battle::isWon(player.getAttackStrength(), m_force)) {
-        Battle::handleWin(player, m_coins, m_name);
+        Battle::handleWin(player, m_loot, m_name);
     }
     
     else {

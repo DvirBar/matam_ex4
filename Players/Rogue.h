@@ -2,7 +2,6 @@
 #define MATAM_EX4_ROGUE_H
 
 #include "Player.h"
-#include "../utilities.h"
 #include <string>
 #include <iostream>
 
@@ -30,8 +29,8 @@ public:
      * Outputs Rogue's Parameters according to given structure
      */
     void printInfo(std::ostream &output) const override;
-
-
+    
+    static const std::string JOB_NAME;
 
 };
 

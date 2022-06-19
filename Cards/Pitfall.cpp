@@ -3,7 +3,9 @@
 //
 #include "Pitfall.h"
 
-Pitfall::Pitfall() : Card(PITFALL_NAME)
+const std::string CARD_NAME = "Pitfall";
+
+Pitfall::Pitfall() : Card(CARD_NAME)
 {}
 
 void Pitfall::applyEncounter(Player& player) const {
@@ -12,7 +14,7 @@ void Pitfall::applyEncounter(Player& player) const {
         printPitfallMessage(true);
     }
     else {
-        player.damage(PITFALL_DAMAGE);
+        player.damage(DAMAGE);
         printPitfallMessage(false);
     }
 }

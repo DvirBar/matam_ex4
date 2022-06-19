@@ -1,5 +1,7 @@
 #include "Merchant.h"
 
+const std::string Merchant::MERCHANT_NAME = "Merchant";
+
 Merchant::Merchant() : Card(MERCHANT_NAME)
 {}
 
