@@ -105,7 +105,7 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
 
 bool Mtmchkin::validatePlayerName(std::string &input, std::string &name) {
     char currentChar;
-    for(int i = 0; i < input.size(); i++) {
+    for(unsigned int i = 0; i < input.size(); i++) {
         currentChar = input[i];
         if(currentChar == ' ') {
             break;
@@ -124,7 +124,7 @@ bool Mtmchkin::validatePlayerName(std::string &input, std::string &name) {
 bool Mtmchkin::validateClassAndCreatePlayer(std::string input, std::string name, std::unique_ptr<Player> &player) {
     std::string playerClass;
     
-    for(unsigned int i = name.size() + 1; i < input.size(); i++) {
+    for(unsigned int i = (int)name.size() + 1; i < input.size(); i++) {
         playerClass[i] = input[i];
     }
     
