@@ -7,7 +7,7 @@
 
 class Dragon: public Battle {
 public:
-    Dragon();
+    explicit Dragon();
     
     void applyEncounter(Player &player) const override;
     

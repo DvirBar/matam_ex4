@@ -5,7 +5,7 @@
 
 class Goblin: public Battle {
 public:
-    Goblin();
+    explicit Goblin();
     
     void applyEncounter(Player &player) const override;
     

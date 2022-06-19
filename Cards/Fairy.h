@@ -15,7 +15,7 @@ public:
     /**
      * Constructor for Fairy Card
      */
-    Fairy();
+    explicit Fairy();
 
     /**
      * Heals 10 HP for A WIZARD ONLY.

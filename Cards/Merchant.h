@@ -13,7 +13,7 @@ public:
     /**
      * Constructor for the Merchant Card
      */
-    Merchant();
+    explicit Merchant();
 
     /**
      * Applies encounter according to given rules:

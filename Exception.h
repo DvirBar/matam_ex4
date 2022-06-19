@@ -14,9 +14,9 @@ public:
 
 class DeckFileFormatError: public std::exception {
 public:
-    explicit DeckFileFormatError(int lineNumber) :
-    m_error("Deck File Error: File format error in line " + std::to_string(lineNumber))
-    { }
+    explicit DeckFileFormatError(int lineNumber):
+        m_error("Deck File Error: File format error in line " + std::to_string(lineNumber))
+    {}
 
     const char* what() const noexcept override {
         return m_error.c_str();

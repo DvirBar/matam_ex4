@@ -14,7 +14,7 @@ public:
      *
      * @param name - The name of the card.
      */
-    Card(std::string name);
+    explicit Card(std::string name);
 
     /**
      * Virtual function for handling the player's encounter with a card.

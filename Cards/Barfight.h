@@ -14,7 +14,7 @@ public:
     /**
      * Constructor for Barfight card.
      */
-    Barfight();
+    explicit Barfight();
 
     /**
      * applies the barfight effect according to given rules:

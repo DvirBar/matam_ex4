@@ -14,7 +14,7 @@ public:
     /**
      * Constructor for Pitfall card.
      */
-    Pitfall();
+    explicit Pitfall();
 
     /**
      * Applies encounter according to given rules:

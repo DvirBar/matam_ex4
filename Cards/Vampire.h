@@ -8,7 +8,7 @@
 
 class Vampire: public Battle {
 public:
-    Vampire();
+    explicit Vampire();
     
     void applyEncounter(Player &player) const override;
     

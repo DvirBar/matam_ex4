@@ -6,7 +6,7 @@
 
 class Treasure: public Card {
 public:
-    Treasure();
+    explicit Treasure();
     
     void applyEncounter(Player &player) const override;
     
