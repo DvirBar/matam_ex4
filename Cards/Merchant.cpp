@@ -10,9 +10,24 @@ void Merchant::applyEncounter(Player &player) const {
 
     std::string playerStringInput;
     // TODO Catch thrown exceptions.
-    std::getline(std::cin, playerStringInput);
-    int playerInput = std::stoi(playerStringInput);
+    bool inputFlag = true;
+    int playerInput = -1;
+    while(inputFlag) {
+        try {
+            std::getline(std::cin, playerStringInput);
+            playerInput = std::stoi(playerStringInput);
+            if((playerInput !=  LEAVE_OPTION) && (playerInput != HEALTH_POTION_OPTION) && (playerInput != FORCE_BOOST_OPTION)) {
+                printInvalidInput();
+                continue;
+            }
 
+        }
+        catch (std::invalid_argument& invalidArgument) {
+            printInvalidInput();
+            continue;
+        }
+        inputFlag = false;
+    }
     int payment = 0;
 
     std::cin >> playerInput;
