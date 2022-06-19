@@ -2,9 +2,9 @@
 #define MTMCHKIN_H_
 
 #include <memory>
-#include <list>
 #include <string>
 #include <map>
+#include <deque>
 #include <fstream>
 
 #include "Cards/Card.h"
