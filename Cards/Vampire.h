@@ -11,6 +11,7 @@ public:
     explicit Vampire();
     
     void applyEncounter(Player &player) const override;
+    void loseBattle(Player &player) const override;
     
     // TODO: constructors?
     Vampire(const Vampire& vampire) = default;

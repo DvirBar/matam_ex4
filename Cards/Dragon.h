@@ -8,7 +8,8 @@
 class Dragon: public Battle {
 public:
     explicit Dragon();
-    
+
+    void loseBattle(Player &player) const override;
     void applyEncounter(Player &player) const override;
     
     // TODO: Constructors?

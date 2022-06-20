@@ -14,6 +14,7 @@ public:
     int getForce() const;
     int getDamageUponLoss() const;
     int getCoins() const;
+    virtual void loseBattle(Player& player) const = 0;
     
     // TODO: Copy c'tor, =operator, destructor?
     Battle(const Battle& battle) = default;

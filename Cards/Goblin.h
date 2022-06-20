@@ -8,6 +8,8 @@ public:
     explicit Goblin();
     
     void applyEncounter(Player &player) const override;
+
+    void loseBattle(Player &player) const override;
     
     // TODO: Constructors?
     Goblin(const Goblin& goblin) = default;
