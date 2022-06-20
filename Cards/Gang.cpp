@@ -10,6 +10,13 @@ void Gang::printGangWin(const std::string& playerName) {
 
 void Gang::applyEncounter(Player &player) const {
     bool hasLost = false;
+
+    if(m_monsterQueue.empty()) {
+        player.levelUp();
+        Gang::printGangWin(player.getName());
+        return;
+    }
+    
     for(const std::unique_ptr<Battle> &currentMonster : m_monsterQueue) {
         if(player.getAttackStrength() >= currentMonster->getForce() && !hasLost) {
             player.addCoins(currentMonster->getCoins());
@@ -19,7 +26,7 @@ void Gang::applyEncounter(Player &player) const {
             currentMonster->loseBattle(player);
         }
     }
-    
+
     if(!hasLost) {
         player.levelUp();
         Gang::printGangWin(player.getName());
