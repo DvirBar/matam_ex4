@@ -16,21 +16,21 @@ public:
      */
     explicit Player(const std::string& name);
 
-//    /**
-//     * Copy Constructor of Player Class
-//     * Copies every parameter of given player object to "this" player object.
-//     * @param player - Player object to copy.
-//     */
-//    Player(const Player& player);
-//
-//    /**
-//     * Player Class Assignment Operator
-//     *
-//     * @param player - Player other object to assign.
-//     * @return
-//     *      This Player object after assignment.
-//     */
-//    Player& operator=(const Player& player);
+    /**
+     * Copy Constructor of Player Class
+     * Copies every parameter of given player object to "this" player object.
+     * @param player - Player object to copy.
+     */
+    Player(const Player& player);
+
+    /**
+     * Player Class Assignment Operator
+     *
+     * @param player - Player other object to assign.
+     * @return
+     *      This Player object after assignment.
+     */
+    Player& operator=(const Player& player);
 
 
     /**

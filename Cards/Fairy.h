@@ -16,6 +16,10 @@ public:
      */
     explicit Fairy();
 
+    Fairy(const Fairy& fairy)  = default;
+
+    Fairy& operator=(const Fairy& fairy) = default;
+
     /**
      * Heals 10 HP for A WIZARD ONLY.
      */

@@ -16,6 +16,10 @@ public:
      */
     explicit Pitfall();
 
+    Pitfall(const Pitfall& pitfall) = default;
+
+    Pitfall& operator=(const Pitfall& pitfall) = default;
+
     /**
      * Applies encounter according to given rules:
      *     If a the player is not a rogue, the player will get 10 HP damage.

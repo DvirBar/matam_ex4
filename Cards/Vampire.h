@@ -8,14 +8,24 @@
 
 class Vampire: public Battle {
 public:
+
     Vampire();
-    
-    void applyEncounter(Player &player) const override;
-    void loseBattle(Player &player) const override;
-    
-    // TODO: constructors?
+
     Vampire(const Vampire& vampire) = default;
-    ~Vampire() = default;
+
+    Vampire& operator=(const Vampire& vampire) = default;
+
+    /**
+     * Encounter with a Vampire:
+     *    Upon win: The player gets loot of 2 coins and levels up.
+     *    Upon lose: The player gets damage of 10 HP, and de-buffed by 1 force point.
+     * @param player
+     */
+    void applyEncounter(Player &player) const override;
+
+    void loseBattle(Player &player) const override;
+
+    ~Vampire() override = default;
     
     static const std::string CARD_NAME;
     static const int FORCE = 10;

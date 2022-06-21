@@ -21,6 +21,10 @@ public:
      */
     explicit Wizard(const std::string &name);
 
+    Wizard(const Wizard& wizard) = default;
+
+    Wizard& operator=(const Wizard& wizard) = default;
+
     ~Wizard() override = default;
 
     /**

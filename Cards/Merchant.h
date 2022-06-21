@@ -15,6 +15,10 @@ public:
      */
     explicit Merchant();
 
+    Merchant(const Merchant& merchant) = default;
+
+    Merchant& operator=(const Merchant& merchant) = default;
+
     /**
      * Applies encounter according to given rules:
      *      A player can pay 5 coins to buy 1 Health Point boost.

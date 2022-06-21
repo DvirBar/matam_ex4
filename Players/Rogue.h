@@ -17,6 +17,10 @@ public:
      */
     explicit Rogue(const std::string& name);
 
+    Rogue(const Rogue& rogue) = default;
+
+    Rogue& operator=(const Rogue& rogue) = default;
+
     ~Rogue() override = default;
 
     /**

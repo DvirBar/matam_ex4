@@ -3,7 +3,7 @@
 const std::string Wizard::JOB_NAME = "Wizard";
 
 Wizard::Wizard(const std::string &name): Player(name)
-{}
+{ }
 
 void Wizard::heal(int HPToHeal) {
     int doubleTheHP = 2 * HPToHeal;
