@@ -1,9 +1,10 @@
 #include "Fairy.h"
 
 
-const std::string CARD_NAME = "Fairy";
+const std::string Fairy::CARD_NAME = "Fairy";
 
-Fairy::Fairy() : Card(CARD_NAME)
+Fairy::Fairy():
+    Card(CARD_NAME)
 {}
 
 void Fairy::applyEncounter(Player &player) const {

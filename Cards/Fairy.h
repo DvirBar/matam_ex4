@@ -9,9 +9,8 @@
 
 // --------------------------------------- Fairy Card Class --------------------------------------- //
 
-class Fairy : public Card {
+class Fairy: public Card {
 public:
-
     /**
      * Constructor for Fairy Card
      */

@@ -2,7 +2,7 @@
 #include "Dragon.h"
 #include "Battle.h"
 
-const std::string CARD_NAME = "Dragon";
+const std::string Dragon::CARD_NAME = "Dragon";
 
 Dragon::Dragon():
     Battle(CARD_NAME, FORCE, DAMAGE_UPON_LOSS, COINS)

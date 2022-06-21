@@ -4,6 +4,7 @@
 *.cmake
 *.bin
 *.exe
+tests
 cmake-build-debug/*
 *.check_cache
 *.log

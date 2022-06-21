@@ -13,7 +13,6 @@
 class Mtmchkin{
 
 public:
-    
     /*
     * C'tor of Mtmchkin class
     *
@@ -64,8 +63,7 @@ private:
     int m_numberOfRounds;
     bool m_gameOver;
     
-    static void createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &deck,
-                           std::map<std::string, std::unique_ptr<Card>> &cardMap);
+    static void createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &deck);
     
     static std::unique_ptr<Card> chooseCardByType(std::string &cardType, int deckSize);
     static std::unique_ptr<Player> choosePlayerByClass(std::string &name, std::string &playerClass);
@@ -74,9 +72,7 @@ private:
     static bool validateClassAndCreatePlayer(std::string input, std::string name, std::unique_ptr<Player> &player);
     static void insertIntoLeaderboard(std::unique_ptr<Player> &player, std::deque<std::unique_ptr<Player>> &playersWon,
                                       std::deque<std::unique_ptr<Player>> &playersLost);
-    
-    static std::map<std::string, std::unique_ptr<Card>> CARD_MAP;
-//    static const std::map<std::string, std::unique_ptr<Player>> playersMap;
+
     static const int TEAM_MIN_SIZE = 2;
     static const int TEAM_MAX_SIZE = 6; 
 };

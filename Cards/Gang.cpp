@@ -1,8 +1,10 @@
 #include "Gang.h"
+
 const std::string Gang::GANG_NAME = "Gang";
 
-Gang::Gang() : Card(GANG_NAME)
-{ }
+Gang::Gang():
+    Card(GANG_NAME)
+{}
 
 void Gang::printGangWin(const std::string& playerName) {
     std::cout << "Player " << playerName << " has defeated A Gang and rose 1 Level!" << std::endl;

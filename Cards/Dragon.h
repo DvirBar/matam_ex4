@@ -3,8 +3,6 @@
 
 #include "Battle.h"
 
-
-
 class Dragon: public Battle {
 public:
     explicit Dragon();

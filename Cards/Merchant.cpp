@@ -2,7 +2,8 @@
 
 const std::string Merchant::MERCHANT_NAME = "Merchant";
 
-Merchant::Merchant() : Card(MERCHANT_NAME)
+Merchant::Merchant():
+    Card(MERCHANT_NAME)
 {}
 
 void Merchant::applyEncounter(Player &player) const {
@@ -28,6 +29,7 @@ void Merchant::applyEncounter(Player &player) const {
         }
         inputFlag = false;
     }
+    
     int payment = 0;
 
     std::cin >> playerInput;

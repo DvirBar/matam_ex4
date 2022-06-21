@@ -9,7 +9,7 @@
 
 // --------------------------------------- Pitfall Card Class --------------------------------------- //
 
-class Pitfall : public Card {
+class Pitfall: public Card {
 public:
     /**
      * Constructor for Pitfall card.

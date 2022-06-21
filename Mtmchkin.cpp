@@ -21,73 +21,69 @@
 #include "Players/Rogue.h"
 #include "Players/Fighter.h"
 
-// TODO: should we use a shared_ptr or use
-//std::map<std::string, std::unique_ptr<Card>> Mtmchkin::CARD_MAP {
-//    { "Vampire", std::unique_ptr<Card>(new Vampire()) },
-//    { "Goblin", std::unique_ptr<Card>(new Goblin()) },
-//    { "Dragon", std::unique_ptr<Card>(new Dragon()) },
-//    { "Treasure", std::unique_ptr<Card>(new Treasure()) },
-//    { "Merchant", std::unique_ptr<Card>(new Merchant()) },
-//    { "Fairy", std::unique_ptr<Card>(new Fairy()) },
-//    { "Pitfall", std::unique_ptr<Card>(new Pitfall()) },
-//    { "Barfight", std::unique_ptr<Card>(new Barfight()) },
-//};
 
 std::unique_ptr<Card> Mtmchkin::chooseCardByType(std::string &cardType, int deckSize) {
-    if(cardType == "Vampire") {
-        return std::unique_ptr<Card>(new Vampire());
+    switch(Card::CARDS_MAP[cardType]) {
+        case Card::CardTypes::Vampire: {
+            return std::unique_ptr<Card>(new Vampire());;
+        }
+        
+        case Card::CardTypes::Goblin: {
+            return std::unique_ptr<Card>(new Goblin());
+        }
+        
+        case Card::CardTypes::Dragon: {
+            return std::unique_ptr<Card>(new Dragon());
+        }
+            
+        case Card::CardTypes::Treasure: {
+            return std::unique_ptr<Card>(new Treasure());
+        }
+            
+        case Card::CardTypes::Merchant: {
+            return std::unique_ptr<Card>(new Merchant());
+        }
+            
+        case Card::CardTypes::Fairy: {
+            return std::unique_ptr<Card>(new Fairy());
+        }
+            
+        case Card::CardTypes::Pitfall: {
+            return std::unique_ptr<Card>(new Pitfall());
+        }
+            
+        case Card::CardTypes::Barfight: {
+            return std::unique_ptr<Card>(new Barfight());
+        }
+            
+        default: {
+            throw DeckFileFormatError(deckSize);
+        }
     }
-
-    if(cardType == "Goblin") {
-        return std::unique_ptr<Card>(new Goblin());
-    }
-
-    if(cardType == "Dragon") {
-        return std::unique_ptr<Card>(new Dragon());
-    }
-
-    if(cardType == "Treasure") {
-        return std::unique_ptr<Card>(new Treasure());
-    }
-
-    if(cardType == "Merchant") {
-        return std::unique_ptr<Card>(new Merchant());
-    }
-
-    if(cardType == "Fairy") {
-        return std::unique_ptr<Card>(new Fairy());
-    }
-
-    if(cardType == "Pitfall") {
-        return std::unique_ptr<Card>(new Pitfall());
-    }
-
-    if(cardType == "Barfight") {
-        return std::unique_ptr<Card>(new Barfight());
-    }
-
-    throw DeckFileFormatError(deckSize);
 }
 
 // TODO: Could this be done with map?
  std::unique_ptr<Player> Mtmchkin::choosePlayerByClass(std::string &name, std::string &playerClass) {
-    if(playerClass == "Wizard") {
-        return std::unique_ptr<Player>(new Wizard(name));
-    }
-    
-    if(playerClass == "Rogue") {
-        return std::unique_ptr<Player>(new Rogue(name));
-    }
-    
-    if(playerClass == "Fighter") {
-        return std::unique_ptr<Player>(new Fighter(name));
-    }
-    
-    throw InvalidPlayer();
+     switch(Player::PLAYERS_MAP[playerClass]) {
+         case Player::PlayerClasses::Rogue: {
+             return std::unique_ptr<Player>(new Rogue(name));
+         }
+            
+         case Player::PlayerClasses::Wizard: {
+             return std::unique_ptr<Player>(new Wizard(name));
+         }
+             
+         case Player::PlayerClasses::Fighter: {
+             return std::unique_ptr<Player>(new Fighter(name));
+         }
+         
+         default: {
+             throw InvalidPlayer();
+         }
+     }
 }
 
-void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &m_deck,
-                          std::map<std::string, std::unique_ptr<Card>> &cardMap) {
+void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &m_deck) {
     std::string cardType;
     std::unique_ptr<Card> newCard;
     int deckSize = 0;
@@ -105,17 +101,18 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
 
 bool Mtmchkin::validatePlayerName(std::string &input, std::string &name) {
     char currentChar;
+    
     for(unsigned int i = 0; i < input.size(); i++) {
         currentChar = input[i];
         if(currentChar == ' ') {
             break;
         }
         
-        if(currentChar < 'a' || currentChar > 'z' || currentChar < 'A' || currentChar > 'Z') {
+        if((currentChar < 'A' || currentChar > 'Z' ) && (currentChar < 'a' || currentChar > 'z')) {
             return false;
         }
         
-        name[i] = currentChar;
+        name += currentChar;
     }
     
     return true;
@@ -123,11 +120,10 @@ bool Mtmchkin::validatePlayerName(std::string &input, std::string &name) {
 
 bool Mtmchkin::validateClassAndCreatePlayer(std::string input, std::string name, std::unique_ptr<Player> &player) {
     std::string playerClass;
-    
     for(unsigned int i = (int)name.size() + 1; i < input.size(); i++) {
-        playerClass[i] = input[i];
+        playerClass += input[i];
     }
-    
+
     try {
         player = choosePlayerByClass(name, playerClass);
     }
@@ -139,26 +135,31 @@ bool Mtmchkin::validateClassAndCreatePlayer(std::string input, std::string name,
 }
 
 void Mtmchkin::createPlayersQueue(int teamSize, std::deque<std::unique_ptr<Player>> &playersQueue) {
-    int index = 0;
     std::string input;
-    
-    while(index < teamSize) {
-        std::cin >> input;
-        std::string name;
-        std::unique_ptr<Player> player;
-        
-        if(!validatePlayerName(input, name)) {
-            printInvalidName();
-            continue;
+    bool inputFlag = true;
+
+    for(int i = 0; i < teamSize; ++i) {
+        printInsertPlayerMessage();
+        while(inputFlag) {
+            std::getline(std::cin, input);
+            std::string name;
+            std::unique_ptr<Player> player;
+            
+            if(!validatePlayerName(input, name)) {
+                printInvalidName();
+                continue;
+            }
+            
+            if(!validateClassAndCreatePlayer(input, name, player)) {
+                printInvalidClass();
+                continue;
+            }
+            
+            playersQueue.push_back(std::move(player));
+            inputFlag = false;
         }
         
-        if(!validateClassAndCreatePlayer(input, name, player)) {
-            printInvalidClass();
-            continue;
-        }
-        
-        playersQueue.push_back(std::move(player));
-        index++;
+        inputFlag = true;
     }
 }
 
@@ -182,27 +183,42 @@ Mtmchkin::Mtmchkin(const std::string filename):
     if(!deckFile) {
         throw DeckFileNotFound();
     }
-    
-    createDeck(deckFile, m_deck, CARD_MAP);
+
+    createDeck(deckFile, m_deck);
     
     printStartGameMessage();
     printEnterTeamSizeMessage();
     
-    int teamSize;
+    std::string teamSizeString;
     
-    // TODO: Could it be more compact?
-    std::cin >> teamSize;
-
-    while (teamSize < Mtmchkin::TEAM_MIN_SIZE || teamSize > Mtmchkin::TEAM_MAX_SIZE) {
-        printInvalidTeamSize();
-        std::cin >> teamSize;
+    int teamSize = 0;
+    bool inputFlag = true;
+    
+    while(inputFlag) {
+        try {
+            std::getline(std::cin, teamSizeString);
+            teamSize = std::stoi(teamSizeString);
+            
+            if(teamSize < Mtmchkin::TEAM_MIN_SIZE || teamSize > Mtmchkin::TEAM_MAX_SIZE) {
+                printInvalidInput();
+                continue;
+            }
+        }
+        
+        catch(std::invalid_argument& invalidArgument) {
+            printInvalidInput();
+            continue;
+        }
+        
+        inputFlag = false;
     }
+  
 
     createPlayersQueue(teamSize, Mtmchkin::m_playersQueue);
 }
 
 void Mtmchkin::playRound() {
-    printRoundStartMessage(m_numberOfRounds);
+    printRoundStartMessage(m_numberOfRounds+1);
     
     int playersPlayed = 0;
     int originalQueueSize = (int)m_playersQueue.size();
@@ -246,6 +262,10 @@ bool Mtmchkin::isGameOver() const {
 }
 
 void Mtmchkin::printLeaderBoard() const {
+    if(isGameOver()) {
+        printGameEndMessage();
+    }
+    
     printLeaderBoardStartMessage();
     int ranking = 1;
 

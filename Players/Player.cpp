@@ -1,6 +1,12 @@
 #include <string>
 #include "Player.h"
 
+std::map<std::string, int> Player::PLAYERS_MAP {
+    { "Rogue", PlayerClasses::Rogue },
+    { "Wizard", PlayerClasses::Wizard },
+    { "Fighter", PlayerClasses::Fighter }
+};
+
 Player::Player(const std::string& name) :
     m_name(name),
     m_level(INIT_LEVEL),

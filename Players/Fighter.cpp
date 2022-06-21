@@ -3,7 +3,7 @@
 //
 #include "Fighter.h"
 
-const std::string JOB_NAME = "Fighter";
+const std::string Fighter::JOB_NAME = "Fighter";
 
 Fighter::Fighter(const std::string &name): Player(name)
 {}

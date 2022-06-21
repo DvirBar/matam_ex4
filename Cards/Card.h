@@ -3,11 +3,11 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 
 #include "../Players/Player.h"
 
-class Card
-{
+class Card {
 public:
     /**
      * C'tor of Card class
@@ -25,6 +25,8 @@ public:
      * Prints the card info:
      */
     void printInfo() const;
+    
+    static std::map<std::string, int> CARDS_MAP;
 
     /*
      * C'tor to the "default card" - Treasure card that gives 0 coins
@@ -35,8 +37,20 @@ public:
      * Here we are explicitly telling the compiler to use the default methods
      */
     Card(const Card &) = default;
-    virtual ~Card();
+    virtual ~Card() {};
     Card &operator=(const Card &other) = default;
+    
+    enum CardTypes {
+        Barfight = 1,
+        Fairy,
+        Pitfall,
+        Vampire,
+        Goblin,
+        Dragon,
+        Treasure,
+        Merchant
+    };
+
 private:
     std::string m_name;
     

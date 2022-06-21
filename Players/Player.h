@@ -1,11 +1,8 @@
-//
-// Created by 222ro on 06-May-22.
-//
-
 #ifndef HW2_PLAYER_H
 #define HW2_PLAYER_H
 
 #include <string>
+#include <map>
 
 // --------------------------------------- Player Class --------------------------------------- //
 
@@ -107,7 +104,16 @@ public:
 
     virtual void printInfo(std::ostream& output) const = 0;
    
-    virtual ~Player() = 0;
+    virtual ~Player() {};
+    
+    
+    enum PlayerClasses {
+        Rogue = 1,
+        Wizard,
+        Fighter
+    };
+    
+    static std::map<std::string, int> PLAYERS_MAP;
     
     static const int INIT_MAXHP = 100;
     static const int INIT_FORCE = 5;
