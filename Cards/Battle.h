@@ -19,7 +19,7 @@ public:
     int getCoins() const;
 
     /**
-     * Virtual function to determine lose of player to a certain battle card.
+     * Virtual function to force a battle defeat upon a player.
      * @param player - The player that encounters the battle card.
      */
     virtual void loseBattle(Player& player) const = 0;
