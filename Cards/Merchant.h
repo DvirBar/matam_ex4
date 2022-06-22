@@ -36,6 +36,8 @@ public:
     static const int FORCE_BOOST_COST = 10;
     static const int HEALTH_TO_BOOST = 1;
     static const int FORCE_TO_BOOST = 1;
+private:
+    static bool inputCheck(const std::string input);
 };
 
 #endif //MATAM_EX4_MERCHANT_H

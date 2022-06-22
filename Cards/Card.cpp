@@ -18,7 +18,7 @@ std::map<std::string, int> Card::CARDS_MAP {
     { "Merchant", CardTypes::Merchant }
 };
 
-Card::Card(std::string name):
+Card::Card(const std::string& name):
     m_name(name)
 {}
 

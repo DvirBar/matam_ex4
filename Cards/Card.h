@@ -14,7 +14,7 @@ public:
      *
      * @param name - The name of the card.
      */
-    explicit Card(std::string name);
+    explicit Card(const std::string& name);
 
     Card(const Card& card) = default;
 

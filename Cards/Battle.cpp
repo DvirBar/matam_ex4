@@ -7,7 +7,7 @@
 
 const std::string Battle::CARD_NAME = "Battle";
 
-Battle::Battle(std::string name, int force, int damageUponLoss, int loot):
+Battle::Battle(const std::string& name,const int force, const int damageUponLoss, const int loot):
     Card(CARD_NAME),
     m_name(name),
     m_force(force),

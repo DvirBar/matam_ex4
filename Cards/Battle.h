@@ -6,7 +6,7 @@
 
 class Battle: public Card {
 public:
-    explicit Battle(std::string name, int force, int damageUponLoss, int loot);
+    explicit Battle(const std::string& name, const int force, const int damageUponLoss, const int loot);
 
     Battle(const Battle& battle) = default;
 
