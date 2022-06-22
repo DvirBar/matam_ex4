@@ -223,6 +223,7 @@ Mtmchkin::Mtmchkin(const std::string filename):
     m_numberOfRounds(0),
     m_gameOver(false)
 {
+    printStartGameMessage();
     std::ifstream deckFile(filename);
     if(!deckFile) {
         throw DeckFileNotFound();
@@ -230,7 +231,6 @@ Mtmchkin::Mtmchkin(const std::string filename):
 
     createDeck(deckFile, m_deck);
     
-    printStartGameMessage();
     printEnterTeamSizeMessage();
     
     std::string teamSizeString;
