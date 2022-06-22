@@ -1,6 +1,7 @@
 #include <string>
 #include "Dragon.h"
 #include "Battle.h"
+#include "../utilities.h"
 
 const std::string Dragon::CARD_NAME = "Dragon";
 
@@ -21,4 +22,10 @@ void Dragon::applyEncounter(Player &player) const {
         Dragon::loseBattle(player);
 //        Battle::handleLoss(player, m_damageUponLoss, m_name, true);
     }
+}
+
+void Dragon::printInfo(std::ostream& os) const {
+    printCardDetails(os, this->m_name);
+    printMonsterDetails(os, this->m_force, this->m_damageUponLoss, this->m_loot, true);
+    printEndOfCardDetails(os);
 }

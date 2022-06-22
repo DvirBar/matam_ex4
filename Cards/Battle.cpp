@@ -49,4 +49,11 @@ int Battle::getCoins() const {
     return m_loot;
 }
 
+void Battle::printInfo(std::ostream& os) const {
+    printCardDetails(os, this->m_name);
+    printMonsterDetails(os, this->m_force, this->m_damageUponLoss, this->m_loot, false);
+    printEndOfCardDetails(os);
+}
+
+
 

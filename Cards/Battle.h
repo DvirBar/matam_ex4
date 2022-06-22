@@ -23,6 +23,8 @@ public:
      * @param player - The player that encounters the battle card.
      */
     virtual void loseBattle(Player& player) const = 0;
+    
+    virtual void printInfo(std::ostream& os) const override;
 
     ~Battle() override = default;
     

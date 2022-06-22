@@ -2,9 +2,6 @@
 #include <map>
 
 #include "Card.h"
-
-// TODO: Replace
-#include "Battle.h"
 #include "../utilities.h"
 
 std::map<std::string, int> Card::CARDS_MAP {
@@ -25,16 +22,13 @@ Card::Card(const std::string& name):
     m_name(name)
 {}
 
+void Card::printInfo(std::ostream& os) const {
+    printCardDetails(os, this->m_name);
+    printEndOfCardDetails(os);
+}
+
 
 std::ostream& operator<<(std::ostream& os, const Card& card) {
-    printCardDetails(os, card.m_name);
-    const Battle* battleCard = dynamic_cast<const Battle*>(&card);
-    
-    if(battleCard != nullptr) {
-        printMonsterDetails(os, battleCard->getForce(), battleCard->getDamageUponLoss(), battleCard->getCoins());
-    }
-    
-    printEndOfCardDetails(os);
-    
+    card.printInfo(os);
     return os;
 }

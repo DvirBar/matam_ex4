@@ -21,6 +21,7 @@ public:
      *    Upon Lose - The player gets killed and out of the game.
      */
     void applyEncounter(Player &player) const override;
+    void printInfo(std::ostream& os) const override;
 
     void loseBattle(Player &player) const override;
 

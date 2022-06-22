@@ -24,6 +24,7 @@ public:
      * Virtual function for handling the player's encounter with a card.
      */
     virtual void applyEncounter(Player &player) const = 0;
+    virtual void printInfo(std::ostream& os) const;
 
     static std::map<std::string, int> CARDS_MAP;
 
