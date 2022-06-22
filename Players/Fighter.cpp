@@ -6,7 +6,7 @@
 const std::string Fighter::JOB_NAME = "Fighter";
 
 Fighter::Fighter(const std::string &name): Player(name)
-{}
+{ }
 
 int Fighter::getAttackStrength() const {
     return m_force * 2 + m_level;

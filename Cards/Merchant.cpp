@@ -6,29 +6,35 @@ Merchant::Merchant():
     Card(MERCHANT_NAME)
 {}
 
+bool Merchant::inputCheck(const std::string input) {
+    if((input.length() != 1) || input[0] < '0' || input[0] > '2') {
+        return false;
+    }
+    return true;
+}
+
 void Merchant::applyEncounter(Player &player) const {
     printMerchantInitialMessageForInteractiveEncounter(std::cout, player.getName(), player.getCoins());
 
     std::string playerStringInput;
-    // TODO Catch thrown exceptions.
     bool inputFlag = true;
     int playerInput = -1;
     while(inputFlag) {
-        try {
-            std::getline(std::cin, playerStringInput);
-            playerInput = std::stoi(playerStringInput);
-            if((playerInput !=  LEAVE_OPTION) && (playerInput != HEALTH_POTION_OPTION) && (playerInput != FORCE_BOOST_OPTION)) {
-                printInvalidInput();
-                continue;
-            }
-
-        }
-        catch (std::invalid_argument& invalidArgument) {
+        std::getline(std::cin, playerStringInput);
+        if (inputCheck(playerStringInput)) {
             printInvalidInput();
             continue;
         }
+        playerInput = std::stoi(playerStringInput);
         inputFlag = false;
     }
+
+//
+//            if((playerInput !=  LEAVE_OPTION) && (playerInput != HEALTH_POTION_OPTION) && (playerInput != FORCE_BOOST_OPTION)) {
+//
+//                continue;
+//            }
+
     
     int payment = 0;
 

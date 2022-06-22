@@ -17,6 +17,11 @@ public:
      */
     explicit Fighter(const std::string &name);
 
+    Fighter(const Fighter& fighter) = default;
+
+    Fighter& operator=(const Fighter& fighter) = default;
+
+
     ~Fighter() override = default;
 
     /**

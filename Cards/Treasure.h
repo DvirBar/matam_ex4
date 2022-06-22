@@ -6,8 +6,16 @@
 
 class Treasure: public Card {
 public:
+
     explicit Treasure();
-    
+
+    Treasure(const Treasure& treasure) = default;
+
+    Treasure& operator=(const Treasure& treasure) = default;
+
+    /**
+     * The player gets 10 coins.
+     */
     void applyEncounter(Player &player) const override;
     
     static const std::string CARD_NAME;

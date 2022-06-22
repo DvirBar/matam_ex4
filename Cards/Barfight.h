@@ -16,6 +16,10 @@ public:
      */
     explicit Barfight();
 
+    Barfight(const Barfight& barfight) = default;
+
+    Barfight& operator=(const Barfight& barfight) = default;
+
     /**
      * applies the barfight effect according to given rules:
      *     if the player is not a fighter, the player will get 10 HP damage.

@@ -6,19 +6,25 @@
 
 class Battle: public Card {
 public:
-    // TODO: Should we init it with constructor or use fields and protected?
-    explicit Battle(std::string name, int force, int damageUponLoss, int loot);
-    
-    // TODO: Should I use pure virtual here for apply encounter
-    
-    int getForce() const;
-    int getDamageUponLoss() const;
-    int getCoins() const;
-    virtual void loseBattle(Player& player) const = 0;
-    
-    // TODO: Copy c'tor, =operator, destructor?
+    explicit Battle(const std::string& name, const int force, const int damageUponLoss, const int loot);
+
     Battle(const Battle& battle) = default;
-    ~Battle() = default;
+
+    Battle& operator=(const Battle& battle) = default;
+
+    int getForce() const;
+
+    int getDamageUponLoss() const;
+
+    int getCoins() const;
+
+    /**
+     * Virtual function to force a battle defeat upon a player.
+     * @param player - The player that encounters the battle card.
+     */
+    virtual void loseBattle(Player& player) const = 0;
+
+    ~Battle() override = default;
     
     static const std::string CARD_NAME;
     static bool isWon(int playerForce, int cardForce);

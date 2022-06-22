@@ -103,6 +103,7 @@ std::unique_ptr<Battle> Mtmchkin::chooseBattleCardByType(std::string &cardType, 
      }
 }
 
+// TODO: That's a bit of spaghetti code, I should refactor it
 void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &m_deck) {
     std::string cardType;
     std::unique_ptr<Card> newCard;
@@ -121,6 +122,7 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
         
         else if (cardType == Card::END_GANG) {
             isGang = false;
+            m_deck.push_back(std::move(gang));
         }
         
         else {
@@ -264,7 +266,6 @@ void Mtmchkin::playRound() {
     
     int playersPlayed = 0;
     int originalQueueSize = (int)m_playersQueue.size();
-    
     while(playersPlayed < originalQueueSize) {
         std::unique_ptr<Player> currentPlayer = std::move(m_playersQueue.front());
         m_playersQueue.pop_front();
@@ -275,7 +276,7 @@ void Mtmchkin::playRound() {
         m_deck.pop_front();
         
         currentCard->applyEncounter(*currentPlayer);
-        
+
         if(currentPlayer->getLevel() == Player::MAX_LEVEL || currentPlayer->isKnockedOut()) {
             insertIntoLeaderboard(currentPlayer, m_playersWon, m_playersLost);
         }

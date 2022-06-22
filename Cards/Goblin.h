@@ -6,14 +6,21 @@
 class Goblin: public Battle {
 public:
     explicit Goblin();
-    
+
+    Goblin(const Goblin& goblin) = default;
+
+    Goblin& operator=(const Goblin& goblin) = default;
+
+    /**
+     * Encounter with a Goblin:
+     *     Upon win - the player gets loot of 2 coins and levels up.
+     *     Upon lose - the player gets damage of 10 HP.
+     */
     void applyEncounter(Player &player) const override;
 
     void loseBattle(Player &player) const override;
     
-    // TODO: Constructors?
-    Goblin(const Goblin& goblin) = default;
-    ~Goblin() = default;
+    ~Goblin() override = default;
     
     static const std::string CARD_NAME;
     static const int FORCE = 6;

@@ -10,4 +10,3 @@ inputs
 cmake-build-debug/*
 *.check_cache
 *.log
-CMakeLists.txt

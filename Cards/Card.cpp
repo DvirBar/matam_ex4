@@ -19,9 +19,9 @@ std::map<std::string, int> Card::CARDS_MAP {
     { "Gang", CardTypes::Gang }
 };
 
-const std::string Card::END_GANG = "End Gang";
+const std::string Card::END_GANG = "EndGang";
 
-Card::Card(std::string name):
+Card::Card(const std::string& name):
     m_name(name)
 {}
 

@@ -8,12 +8,11 @@ Gang::Gang():
 {}
 
 void Gang::printGangWin(const std::string& playerName) {
-    std::cout << "Player " << playerName << " has defeated a gang and leveled up!" << std::endl;
+    std::cout << "Player " << playerName << " has defeated Gang and rose 1 Level!" << std::endl;
 }
 
 void Gang::applyEncounter(Player &player) const {
     bool hasLost = false;
-
     // TODO: Level up on an empty queue
     if(m_monsterQueue.empty()) {
         player.levelUp();
@@ -21,8 +20,14 @@ void Gang::applyEncounter(Player &player) const {
         return;
     }
     
+//    for(const std::unique_ptr<Battle> &currentMonster : m_monsterQueue) {
+//        std::cout << currentMonster->CARD_NAME << std::endl;
+//    }
+//
+    
     for(const std::unique_ptr<Battle> &currentMonster : m_monsterQueue) {
         if(Battle::isWon(player.getAttackStrength(), currentMonster->getForce()) && !hasLost) {
+            
             player.addCoins(currentMonster->getCoins());
         }
         
