@@ -15,8 +15,11 @@ std::map<std::string, int> Card::CARDS_MAP {
     { "Goblin", CardTypes::Goblin },
     { "Dragon", CardTypes::Dragon },
     { "Treasure", CardTypes::Treasure },
-    { "Merchant", CardTypes::Merchant }
+    { "Merchant", CardTypes::Merchant },
+    { "Gang", CardTypes::Gang }
 };
+
+const std::string Card::END_GANG = "End Gang";
 
 Card::Card(std::string name):
     m_name(name)

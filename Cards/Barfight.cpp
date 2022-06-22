@@ -1,6 +1,7 @@
 #include "Barfight.h"
 
 const std::string Barfight::CARD_NAME = "Barfight";
+
 Barfight::Barfight() : Card(CARD_NAME)
 {}
 

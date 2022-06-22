@@ -16,6 +16,7 @@
 #include "Cards/Pitfall.h"
 #include "Cards/Barfight.h"
 #include "Cards/Merchant.h"
+#include "Cards/Gang.h"
 #include "Players/Player.h"
 #include "Players/Wizard.h"
 #include "Players/Rogue.h"
@@ -25,7 +26,7 @@
 std::unique_ptr<Card> Mtmchkin::chooseCardByType(std::string &cardType, int deckSize) {
     switch(Card::CARDS_MAP[cardType]) {
         case Card::CardTypes::Vampire: {
-            return std::unique_ptr<Card>(new Vampire());;
+            return std::unique_ptr<Card>(new Vampire());
         }
         
         case Card::CardTypes::Goblin: {
@@ -62,7 +63,26 @@ std::unique_ptr<Card> Mtmchkin::chooseCardByType(std::string &cardType, int deck
     }
 }
 
-// TODO: Could this be done with map?
+std::unique_ptr<Battle> Mtmchkin::chooseBattleCardByType(std::string &cardType, int deckSize) {
+    switch(Card::CARDS_MAP[cardType]) {
+        case Card::CardTypes::Vampire: {
+            return std::unique_ptr<Battle>(new Vampire());
+        }
+        
+        case Card::CardTypes::Goblin: {
+            return std::unique_ptr<Battle>(new Goblin());
+        }
+        
+        case Card::CardTypes::Dragon: {
+            return std::unique_ptr<Battle>(new Dragon());
+        }
+            
+        default: {
+            throw DeckFileFormatError(deckSize);
+        }
+    }
+}
+
  std::unique_ptr<Player> Mtmchkin::choosePlayerByClass(std::string &name, std::string &playerClass) {
      switch(Player::PLAYERS_MAP[playerClass]) {
          case Player::PlayerClasses::Rogue: {
@@ -86,12 +106,34 @@ std::unique_ptr<Card> Mtmchkin::chooseCardByType(std::string &cardType, int deck
 void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &m_deck) {
     std::string cardType;
     std::unique_ptr<Card> newCard;
+    std::unique_ptr<Gang> gang;
+    
     int deckSize = 0;
+    bool isGang = false;
     
     while(std::getline(deckFile, cardType)) {
         deckSize++;
-        newCard = chooseCardByType(cardType, deckSize);
-        m_deck.push_back(std::move(newCard));
+        
+        if(Card::CARDS_MAP[cardType] == Card::CardTypes::Gang) {
+            isGang = true;
+            gang = std::unique_ptr<Gang>(new Gang());
+        }
+        
+        else if (cardType == Card::END_GANG) {
+            isGang = false;
+        }
+        
+        else {
+            newCard = chooseCardByType(cardType, deckSize);
+            
+            if(isGang) {
+                gang->addMonster(chooseBattleCardByType(cardType, deckSize));
+            }
+ 
+            else {
+                m_deck.push_back(std::move(newCard));
+            }
+        }
     }
     
     if(deckSize < 5) {

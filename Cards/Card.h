@@ -48,8 +48,11 @@ public:
         Goblin,
         Dragon,
         Treasure,
-        Merchant
+        Merchant,
+        Gang
     };
+    
+    static const std::string END_GANG; 
 
 private:
     std::string m_name;

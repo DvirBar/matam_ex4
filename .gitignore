@@ -3,8 +3,10 @@
 *.xml
 *.cmake
 *.bin
+*.txt
 *.exe
 tests
+inputs
 cmake-build-debug/*
 *.check_cache
 *.log

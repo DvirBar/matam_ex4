@@ -21,9 +21,9 @@ public:
     ~Battle() = default;
     
     static const std::string CARD_NAME;
+    static bool isWon(int playerForce, int cardForce);
     
 protected:
-    static bool isWon(int playerForce, int cardForce);
     static void handleWin(Player &player, int coins, std::string name);
     static void handleLoss(Player &player, int damage, std::string name, bool killOnLoss);
     std::string m_name;

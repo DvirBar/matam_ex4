@@ -8,6 +8,7 @@
 #include <fstream>
 
 #include "Cards/Card.h"
+#include "Cards/Battle.h"
 #include "Players/Player.h"
 
 class Mtmchkin{
@@ -66,6 +67,7 @@ private:
     static void createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &deck);
     
     static std::unique_ptr<Card> chooseCardByType(std::string &cardType, int deckSize);
+    static std::unique_ptr<Battle> chooseBattleCardByType(std::string &cardType, int deckSize);
     static std::unique_ptr<Player> choosePlayerByClass(std::string &name, std::string &playerClass);
     static void createPlayersQueue(int teamSize, std::deque<std::unique_ptr<Player>> &playersQueue);
     static bool validatePlayerName(std::string &input, std::string &name);

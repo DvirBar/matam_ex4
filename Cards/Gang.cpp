@@ -1,28 +1,31 @@
 #include "Gang.h"
+#include "Battle.h"
 
-const std::string Gang::GANG_NAME = "Gang";
+const std::string Gang::CARD_NAME = "Gang";
 
 Gang::Gang():
-    Card(GANG_NAME)
+    Card(CARD_NAME)
 {}
 
 void Gang::printGangWin(const std::string& playerName) {
-    std::cout << "Player " << playerName << " has defeated A Gang and rose 1 Level!" << std::endl;
+    std::cout << "Player " << playerName << " has defeated a gang and leveled up!" << std::endl;
 }
 
 void Gang::applyEncounter(Player &player) const {
     bool hasLost = false;
 
+    // TODO: Level up on an empty queue
     if(m_monsterQueue.empty()) {
         player.levelUp();
-        Gang::printGangWin(player.getName());
+        printGangWin(player.getName());
         return;
     }
     
     for(const std::unique_ptr<Battle> &currentMonster : m_monsterQueue) {
-        if(player.getAttackStrength() >= currentMonster->getForce() && !hasLost) {
+        if(Battle::isWon(player.getAttackStrength(), currentMonster->getForce()) && !hasLost) {
             player.addCoins(currentMonster->getCoins());
         }
+        
         else {
             hasLost = true;
             currentMonster->loseBattle(player);
@@ -31,6 +34,10 @@ void Gang::applyEncounter(Player &player) const {
 
     if(!hasLost) {
         player.levelUp();
-        Gang::printGangWin(player.getName());
+        printGangWin(player.getName());
     }
+}
+
+void Gang::addMonster(std::unique_ptr<Battle> battleCard) {
+    m_monsterQueue.push_back(std::move(battleCard));
 }

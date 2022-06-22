@@ -4,8 +4,6 @@
 #include <string>
 #include "Battle.h"
 
-
-
 class Vampire: public Battle {
 public:
     Vampire();

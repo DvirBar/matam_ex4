@@ -18,9 +18,6 @@ void Vampire::applyEncounter(Player &player) const {
     }
     
     else {
-
         Vampire::loseBattle(player);
-//        player.buff(-FORCE_DAMAGE);
-//        Battle::handleLoss(player, m_damageUponLoss, m_name, false);
     }
 }

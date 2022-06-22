@@ -12,8 +12,10 @@ class Gang: public Card {
 public:
     Gang();
     void applyEncounter(Player &player) const override;
+    void addMonster(std::unique_ptr<Battle> battleCard);
 
-    static const std::string GANG_NAME;
+    static const std::string CARD_NAME;
+                    
 private:
     std::deque<std::unique_ptr<Battle>> m_monsterQueue;
     static void printGangWin(const std::string& playerName);

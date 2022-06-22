@@ -1,6 +1,3 @@
-//
-// Created by 222ro on 14-Jun-22.
-//
 #include "Pitfall.h"
 
 const std::string Pitfall::CARD_NAME = "Pitfall";
