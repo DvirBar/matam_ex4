@@ -10,3 +10,4 @@ inputs
 cmake-build-debug/*
 *.check_cache
 *.log
+mtmchkin

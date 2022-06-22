@@ -56,6 +56,10 @@ public:
     */
     int getNumberOfRounds() const;
     
+    Mtmchkin(const Mtmchkin& mtmchkin) = delete;
+    Mtmchkin& operator=(const Mtmchkin& mtmchkin) = delete;
+
+    
 private:
     std::deque<std::unique_ptr<Card>> m_deck;
     std::deque<std::unique_ptr<Player>> m_playersQueue;

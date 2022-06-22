@@ -29,7 +29,7 @@ public:
     static const std::string CARD_NAME;
     static const int FORCE = 25;
     // Infinite damage?
-    static const int DAMAGE_UPON_LOSS = -1;
+    static const int DAMAGE_UPON_LOSS = Player::INIT_MAXHP;
     static const int COINS = 1000;
 };
 
