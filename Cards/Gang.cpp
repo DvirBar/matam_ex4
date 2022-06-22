@@ -20,11 +20,6 @@ void Gang::applyEncounter(Player &player) const {
         return;
     }
     
-//    for(const std::unique_ptr<Battle> &currentMonster : m_monsterQueue) {
-//        std::cout << currentMonster->CARD_NAME << std::endl;
-//    }
-//
-    
     for(const std::unique_ptr<Battle> &currentMonster : m_monsterQueue) {
         if(Battle::isWon(player.getAttackStrength(), currentMonster->getForce()) && !hasLost) {
             
