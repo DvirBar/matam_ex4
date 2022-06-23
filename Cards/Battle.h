@@ -2,6 +2,8 @@
 #define Battle_h
 
 #include <string>
+#include <memory>
+
 #include "Card.h"
 
 class Battle: public Card {
@@ -27,6 +29,8 @@ public:
     virtual void printInfo(std::ostream& os) const override;
 
     virtual ~Battle() override {};
+    
+    virtual std::unique_ptr<Battle> cloneCard() const = 0;
     
     static const std::string CARD_NAME;
     static bool isWon(int playerForce, int cardForce);

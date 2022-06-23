@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "Battle.h"
 #include "Vampire.h"
 
@@ -20,4 +22,8 @@ void Vampire::applyEncounter(Player &player) const {
     else {
         Vampire::loseBattle(player);
     }
+}
+
+std::unique_ptr<Battle> Vampire::cloneCard() const {
+    return std::unique_ptr<Battle>(new Vampire());
 }

@@ -1,4 +1,6 @@
 #include <string>
+#include <memory>
+
 #include "Goblin.h"
 #include "Battle.h"
 
@@ -23,3 +25,6 @@ void Goblin::applyEncounter(Player &player) const {
     }
 }
 
+std::unique_ptr<Battle> Goblin::cloneCard() const {
+    return std::unique_ptr<Battle>(new Goblin());
+}

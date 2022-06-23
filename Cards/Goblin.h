@@ -1,6 +1,8 @@
 #ifndef Goblin_h
 #define Goblin_h
 
+#include <memory>
+
 #include "Battle.h"
 
 class Goblin: public Battle {
@@ -17,8 +19,10 @@ public:
      *     Upon lose - the player gets damage of 10 HP.
      */
     void applyEncounter(Player &player) const override;
-
+    
     void loseBattle(Player &player) const override;
+    
+    std::unique_ptr<Battle> cloneCard() const override;
     
     ~Goblin() override = default;
     

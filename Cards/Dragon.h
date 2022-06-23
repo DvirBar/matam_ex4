@@ -24,6 +24,8 @@ public:
     void printInfo(std::ostream& os) const override;
 
     void loseBattle(Player &player) const override;
+    
+    std::unique_ptr<Battle> cloneCard() const override;
 
     ~Dragon() override = default;
     

@@ -3,6 +3,7 @@
 #include "Battle.h"
 #include "../Players/Player.h"
 #include "../utilities.h"
+#include "../Exception.h"
 
 
 const std::string Battle::CARD_NAME = "Battle";

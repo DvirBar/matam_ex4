@@ -2,6 +2,7 @@
 #define Vampire_h
 
 #include <string>
+#include <memory>
 #include "Battle.h"
 
 class Vampire: public Battle {
@@ -22,6 +23,8 @@ public:
     void applyEncounter(Player &player) const override;
 
     void loseBattle(Player &player) const override;
+    
+    std::unique_ptr<Battle> cloneCard() const override;
 
     ~Vampire() override = default;
     

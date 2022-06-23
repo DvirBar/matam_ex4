@@ -35,4 +35,6 @@ public:
 
 class InvalidPlayer {};
 
+class InvalidBattle {};
+
 #endif
