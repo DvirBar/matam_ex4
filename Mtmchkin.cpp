@@ -127,7 +127,9 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
     bool isGang = false;
     
     while(std::getline(deckFile, cardType)) {
-        deckSize++;
+        if(!isGang) {
+            deckSize++;
+        }
         
         if(Card::CARDS_MAP[cardType] == Card::CardTypes::Gang && !isGang) {
             isGang = true;
@@ -157,7 +159,7 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
     }
     
     if(isGang) {
-        throw DeckFileFormatError(deckSize);
+        throw DeckFileFormatError(deckSize+1);
     }
 }
 
