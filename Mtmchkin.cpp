@@ -216,7 +216,6 @@ void Mtmchkin::insertIntoLeaderboard(std::unique_ptr<Player> &player, std::deque
     else if(player->isKnockedOut()) {
         playersLost.push_front(std::move(player));
     }
-
 }
 
 Mtmchkin::Mtmchkin(const std::string filename):

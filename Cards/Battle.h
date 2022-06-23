@@ -26,7 +26,7 @@ public:
     
     virtual void printInfo(std::ostream& os) const override;
 
-    ~Battle() override = default;
+    virtual ~Battle() override {};
     
     static const std::string CARD_NAME;
     static bool isWon(int playerForce, int cardForce);
