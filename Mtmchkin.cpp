@@ -155,6 +155,10 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
     if(deckSize < MIN_DECK_SIZE) {
         throw DeckFileInvalidSize();
     }
+    
+    if(isGang) {
+        throw DeckFileFormatError(deckSize);
+    }
 }
 
 bool Mtmchkin::validatePlayerName(std::string &input, std::string &name) {
