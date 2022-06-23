@@ -78,9 +78,18 @@ private:
     static bool validateClassAndCreatePlayer(std::string input, std::string name, std::unique_ptr<Player> &player);
     static void insertIntoLeaderboard(std::unique_ptr<Player> &player, std::deque<std::unique_ptr<Player>> &playersWon,
                                       std::deque<std::unique_ptr<Player>> &playersLost);
+    static bool isNumber(std::string str);
 
     static const int TEAM_MIN_SIZE = 2;
-    static const int TEAM_MAX_SIZE = 6; 
+    static const int TEAM_MAX_SIZE = 6;
+    static const int MIN_DECK_SIZE = 5;
+    static const char ZERO_DIGIT = '0';
+    static const char NINE_DIGIT = '9';
+    static const char A_LETTER_LOWERCASE = 'a';
+    static const char Z_LETTER_LOWERCASE = 'z';
+    static const char A_LETTER_UPPERCASE = 'A';
+    static const char Z_LETTER_UPPERCASE = 'Z';
+    static const char SPACE = ' ';
 };
 
 

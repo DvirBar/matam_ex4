@@ -120,6 +120,7 @@ public:
     static const int INIT_LEVEL = 1;
     static const int INIT_COINS = 10;
     static const int MAX_LEVEL = 10;
+    static const int NAME_MAX_LENGTH = 15;
 
 protected:
     std::string m_name;

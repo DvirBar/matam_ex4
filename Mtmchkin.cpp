@@ -103,6 +103,16 @@ std::unique_ptr<Battle> Mtmchkin::chooseBattleCardByType(std::string &cardType, 
      }
 }
 
+bool Mtmchkin::isNumber(std::string str) {
+    for(int i=0; i < str.size(); i++) {
+        if(str[i] < ZERO_DIGIT || str[i] > NINE_DIGIT) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
 // TODO: That's a bit of spaghetti code, I should refactor it
 void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &m_deck) {
     std::string cardType;
@@ -138,7 +148,7 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
         }
     }
     
-    if(deckSize < 5) {
+    if(deckSize < MIN_DECK_SIZE) {
         throw DeckFileInvalidSize();
     }
 }
@@ -148,11 +158,16 @@ bool Mtmchkin::validatePlayerName(std::string &input, std::string &name) {
     
     for(unsigned int i = 0; i < input.size(); i++) {
         currentChar = input[i];
-        if(currentChar == ' ') {
+        if(currentChar == SPACE) {
             break;
         }
         
-        if((currentChar < 'A' || currentChar > 'Z' ) && (currentChar < 'a' || currentChar > 'z')) {
+        if(i == Player::NAME_MAX_LENGTH) {
+            return false;
+        }
+        
+        if((currentChar < A_LETTER_UPPERCASE || currentChar > Z_LETTER_UPPERCASE ) &&
+           (currentChar < A_LETTER_LOWERCASE || currentChar > Z_LETTER_LOWERCASE)) {
             return false;
         }
         
@@ -237,9 +252,15 @@ Mtmchkin::Mtmchkin(const std::string filename):
     int teamSize = 0;
     bool inputFlag = true;
     
+    // TODO: Weird. might change it.
     while(inputFlag) {
         try {
             std::getline(std::cin, teamSizeString);
+            if(!isNumber(teamSizeString)) {
+                printInvalidInput();
+                continue;
+            }
+            
             teamSize = std::stoi(teamSizeString);
             
             if(teamSize < Mtmchkin::TEAM_MIN_SIZE || teamSize > Mtmchkin::TEAM_MAX_SIZE) {

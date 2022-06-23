@@ -32,6 +32,9 @@ public:
     static const int HEALTH_POTION_OPTION = 1;
     static const int FORCE_BOOST_OPTION = 2;
     static const int LEAVE_OPTION = 0;
+    static const char HEALTH_POTION_OPTION_STR = '1';
+    static const char FORCE_BOOST_OPTION_STR = '2';
+    static const char LEAVE_OPTION_STR = '0';
     static const int HEALTH_POTION_COST = 5;
     static const int FORCE_BOOST_COST = 10;
     static const int HEALTH_TO_BOOST = 1;

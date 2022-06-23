@@ -7,12 +7,14 @@ Merchant::Merchant():
 {}
 
 bool Merchant::inputCheck(const std::string input) {
-    if(input[0] == '0' || input[0] == '1' || input[0] == '2') {
+    if(input.size() == 1 && (input[0] == HEALTH_POTION_OPTION_STR ||
+                             input[0] == LEAVE_OPTION_STR || input[0] == FORCE_BOOST_OPTION_STR)) {
         return true;
     }
+    
     return false;
 }
-// TODO: MAX NAME SIZE
+
 void Merchant::applyEncounter(Player &player) const {
     printMerchantInitialMessageForInteractiveEncounter(std::cout, player.getName(), player.getCoins());
 
