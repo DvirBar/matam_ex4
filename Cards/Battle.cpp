@@ -20,13 +20,13 @@ bool Battle::isWon(int attackStrength, int cardForce) {
     return attackStrength >= cardForce;
 }
 
-void Battle::handleWin(Player &player, int loot, std::string name) {
+void Battle::handleWin(Player &player, int loot, std::string cardName) {
     player.levelUp();
     player.addCoins(loot);
-    printWinBattle(player.getName(), name);
+    printWinBattle(player.getName(), cardName);
 }
 
-void Battle::handleLoss(Player &player, int damage, std::string name, bool killOnLoss) {
+void Battle::handleLoss(Player &player, int damage, std::string cardName, bool killOnLoss) {
     if(killOnLoss) {
         player.killPlayer();
     }
@@ -35,7 +35,7 @@ void Battle::handleLoss(Player &player, int damage, std::string name, bool killO
         player.damage(damage);
     }
     
-    printLossBattle(player.getName(), name);
+    printLossBattle(player.getName(), cardName);
 }
 
 int Battle::getForce() const {

@@ -58,7 +58,6 @@ public:
     
     Mtmchkin(const Mtmchkin& mtmchkin) = delete;
     Mtmchkin& operator=(const Mtmchkin& mtmchkin) = delete;
-
     
 private:
     std::deque<std::unique_ptr<Card>> m_deck;
@@ -79,6 +78,7 @@ private:
     static void insertIntoLeaderboard(std::unique_ptr<Player> &player, std::deque<std::unique_ptr<Player>> &playersWon,
                                       std::deque<std::unique_ptr<Player>> &playersLost);
     static bool isNumber(std::string str);
+    static int getTeamSize();
 
     static const int TEAM_MIN_SIZE = 2;
     static const int TEAM_MAX_SIZE = 6;

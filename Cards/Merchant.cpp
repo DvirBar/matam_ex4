@@ -19,9 +19,9 @@ void Merchant::applyEncounter(Player &player) const {
     printMerchantInitialMessageForInteractiveEncounter(std::cout, player.getName(), player.getCoins());
 
     std::string playerStringInput;
-    bool inputFlag = true;
+    bool validInput = false;
     int playerInput = -1;
-    while(inputFlag) {
+    while(!validInput) {
         std::getline(std::cin, playerStringInput);
      
         if (!inputCheck(playerStringInput)) {
@@ -29,7 +29,7 @@ void Merchant::applyEncounter(Player &player) const {
             continue;
         }
         playerInput = std::stoi(playerStringInput);
-        inputFlag = false;
+        validInput = true;
     }
     
     int payment = 0;

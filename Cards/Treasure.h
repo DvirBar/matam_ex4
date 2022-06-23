@@ -9,14 +9,19 @@ public:
 
     explicit Treasure();
 
-    Treasure(const Treasure& treasure) = default;
-
-    Treasure& operator=(const Treasure& treasure) = default;
+  
 
     /**
      * The player gets 10 coins.
      */
     void applyEncounter(Player &player) const override;
+    
+    /**
+     * Copy contstructor, =operator and destructor.
+     */
+    Treasure(const Treasure& treasure) = default;
+    Treasure& operator=(const Treasure& treasure) = default;
+    ~Treasure() override = default;
     
     static const std::string CARD_NAME;
     static const int CARD_LOOT = 10;

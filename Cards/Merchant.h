@@ -14,11 +14,7 @@ public:
      * Constructor for the Merchant Card
      */
     explicit Merchant();
-
-    Merchant(const Merchant& merchant) = default;
-
-    Merchant& operator=(const Merchant& merchant) = default;
-
+    
     /**
      * Applies encounter according to given rules:
      *      A player can pay 5 coins to buy 1 Health Point boost.
@@ -27,6 +23,14 @@ public:
      *      If A player has insufficient funds, no action will be taken and the turn will end.
      */
     void applyEncounter(Player &player) const override;
+    
+    /**
+     * Copy contstructor, =operator and destructor.
+     */
+    Merchant(const Merchant& merchant) = default;
+    Merchant& operator=(const Merchant& merchant) = default;
+    ~Merchant() override = default;
+
     
     static const std::string MERCHANT_NAME;
     static const int HEALTH_POTION_OPTION = 1;

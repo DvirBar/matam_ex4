@@ -117,7 +117,6 @@ bool Mtmchkin::isNumber(std::string str) {
     return true;
 }
 
-// TODO: That's a bit of spaghetti code, I should refactor it
 void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Card>> &m_deck) {
     std::string cardType;
     std::unique_ptr<Card> newCard;
@@ -207,11 +206,11 @@ bool Mtmchkin::validateClassAndCreatePlayer(std::string input, std::string name,
 
 void Mtmchkin::createPlayersQueue(int teamSize, std::deque<std::unique_ptr<Player>> &playersQueue) {
     std::string input;
-    bool inputFlag = true;
+    bool validInput = false;
 
     for(int i = 0; i < teamSize; ++i) {
         printInsertPlayerMessage();
-        while(inputFlag) {
+        while(!validInput) {
             std::getline(std::cin, input);
             std::string name;
             std::unique_ptr<Player> player;
@@ -227,10 +226,10 @@ void Mtmchkin::createPlayersQueue(int teamSize, std::deque<std::unique_ptr<Playe
             }
             
             playersQueue.push_back(std::move(player));
-            inputFlag = false;
+            validInput = true;
         }
         
-        inputFlag = true;
+        validInput = false;
     }
 }
 
@@ -245,25 +244,13 @@ void Mtmchkin::insertIntoLeaderboard(std::unique_ptr<Player> &player, std::deque
     }
 }
 
-Mtmchkin::Mtmchkin(const std::string filename):
-    m_numberOfRounds(0),
-    m_gameOver(false)
-{
-    printStartGameMessage();
-    std::ifstream deckFile(filename);
-    if(!deckFile) {
-        throw DeckFileNotFound();
-    }
-
-    createDeck(deckFile, m_deck);
-    
+int Mtmchkin::getTeamSize() {
     std::string teamSizeString;
     
     int teamSize = 0;
-    bool inputFlag = true;
-    
-    // TODO: Weird. might change it. And also move it to another function
-    while(inputFlag) {
+    bool validInput = false;
+
+    while(!validInput) {
         printEnterTeamSizeMessage();
         try {
             std::getline(std::cin, teamSizeString);
@@ -285,9 +272,24 @@ Mtmchkin::Mtmchkin(const std::string filename):
             continue;
         }
         
-        inputFlag = false;
+        validInput = true;
     }
-  
+    
+    return teamSize;
+}
+
+Mtmchkin::Mtmchkin(const std::string filename):
+    m_numberOfRounds(0),
+    m_gameOver(false)
+{
+    printStartGameMessage();
+    std::ifstream deckFile(filename);
+    if(!deckFile) {
+        throw DeckFileNotFound();
+    }
+
+    createDeck(deckFile, m_deck);
+    int teamSize = getTeamSize();
 
     createPlayersQueue(teamSize, Mtmchkin::m_playersQueue);
 }

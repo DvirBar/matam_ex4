@@ -70,11 +70,10 @@ public:
      */
     virtual void damage(int HPToDamage);
 
-    // TODO: Why is it virtual
     /**
      * isKnockedOut: Returns true if player's m_HP parameter is 0, else false.
      */
-    virtual bool isKnockedOut() const;
+    bool isKnockedOut() const;
 
     /**
      * addCoins: Adds the given amount of coins to a player's m_coins parameter.

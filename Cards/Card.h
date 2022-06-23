@@ -16,20 +16,28 @@ public:
      */
     explicit Card(const std::string& name);
 
-    Card(const Card& card) = default;
-
-    Card &operator=(const Card& card) = default;
-
     /**
-     * Virtual function for handling the player's encounter with a card.
+     * Virtual method for handling the player's encounter with a card.
+     *
+     * @param player - The player to apply encounter to.
      */
     virtual void applyEncounter(Player &player) const = 0;
+    
+    /**
+     * Vitual method for printing card details.
+     *
+     * @param os - Output stream to print details to.
+     */
     virtual void printInfo(std::ostream& os) const;
-
-    static std::map<std::string, int> CARDS_MAP;
-
-
+    
+    /**
+     * Copy contstructor, =operator and destructor.
+     */
+    Card(const Card& card) = default;
+    Card &operator=(const Card& card) = default;
     virtual ~Card() {};
+    
+    static std::map<std::string, int> CARDS_MAP;
 
     enum CardTypes {
         Barfight = 1,

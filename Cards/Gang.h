@@ -11,12 +11,29 @@
 
 class Gang: public Card {
 public:
-    Gang();
+    /**
+     * Constructor for the Merchant Card
+     */
+    explicit Gang();
+    
+    /**
+     * Virtual method for handling the player's encounter with a gang.
+     *
+     * @param player - The player to apply encounter to.
+     */
     void applyEncounter(Player &player) const override;
+    
+    /**
+     * Adds a new monster to the gang.
+     *
+     * @param battleCard - The battle card to add to the gang.
+     */
     void addMonster(std::unique_ptr<Battle> battleCard);
  
     Gang(const Gang& gang);
     Gang& operator=(const Gang& gang);
+    ~Gang() override = default;
+    
     
     static void cloneQueue(Gang &newGang, const std::deque<std::unique_ptr<Battle>> &queueToClone);
     static const std::string CARD_NAME;

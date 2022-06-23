@@ -16,14 +16,19 @@ public:
      */
     explicit Fairy();
 
-    Fairy(const Fairy& fairy)  = default;
-
-    Fairy& operator=(const Fairy& fairy) = default;
-
     /**
      * Heals 10 HP for A WIZARD ONLY.
+     *
+     * @param player - The player to apply card encounter to.
      */
     void applyEncounter(Player &player) const override;
+    
+    /**
+     * Copy contstructor, =operator and destructor.
+     */
+    Fairy(const Fairy& fairy)  = default;
+    Fairy& operator=(const Fairy& fairy) = default;
+    ~Fairy() override = default;
     
     static const std::string CARD_NAME;
     static const int HEAL = 10;
