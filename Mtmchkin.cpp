@@ -124,9 +124,11 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
     std::unique_ptr<Gang> gang;
     
     int deckSize = 0;
+    int lineNumber = 0;
     bool isGang = false;
     
     while(std::getline(deckFile, cardType)) {
+        lineNumber++;
         if(!isGang) {
             deckSize++;
         }
@@ -142,10 +144,10 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
         }
         
         else {
-            newCard = chooseCardByType(cardType, deckSize);
+            newCard = chooseCardByType(cardType, lineNumber);
             
             if(isGang) {
-                gang->addMonster(chooseBattleCardByType(cardType, deckSize));
+                gang->addMonster(chooseBattleCardByType(cardType, lineNumber));
             }
  
             else {
@@ -159,7 +161,7 @@ void Mtmchkin::createDeck(std::ifstream &deckFile, std::deque<std::unique_ptr<Ca
     }
     
     if(isGang) {
-        throw DeckFileFormatError(deckSize+1);
+        throw DeckFileFormatError(lineNumber+1);
     }
 }
 
