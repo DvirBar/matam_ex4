@@ -47,7 +47,7 @@ void Merchant::applyEncounter(Player &player) const {
             }
             else {
                 printMerchantInsufficientCoins(std::cout);
-                printMerchantSummary(std::cout, player.getName(), LEAVE_OPTION, payment);
+                printMerchantSummary(std::cout, player.getName(), HEALTH_POTION_OPTION, payment);
             }
             break;
 
@@ -59,7 +59,7 @@ void Merchant::applyEncounter(Player &player) const {
             }
             else {
                 printMerchantInsufficientCoins(std::cout);
-                printMerchantSummary(std::cout, player.getName(), LEAVE_OPTION, payment);
+                printMerchantSummary(std::cout, player.getName(), FORCE_BOOST_OPTION, payment);
             }
             break;
 

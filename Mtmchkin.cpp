@@ -273,7 +273,7 @@ Mtmchkin::Mtmchkin(const std::string filename):
         }
         
         catch(std::invalid_argument& invalidArgument) {
-            printInvalidInput();
+            printInvalidTeamSize();
             continue;
         }
         
