@@ -104,7 +104,7 @@ std::unique_ptr<Battle> Mtmchkin::chooseBattleCardByType(std::string &cardType, 
 }
 
 bool Mtmchkin::isNumber(std::string str) {
-    for(int i=0; i < str.size(); i++) {
+    for(unsigned int i=0; i < str.size(); i++) {
         if(str[i] < ZERO_DIGIT || str[i] > NINE_DIGIT) {
             return false;
         }
