@@ -213,7 +213,7 @@ bool goblinCaveTest()
 bool nonMostersTest()
 {
     const string tmp_file("noMonster_test");
-    string input("2\nItay Wizard\nPikachu Rogue");
+    string input("-5\n-30\n2\nItay Wizard\nPikachu Rogue");
     string deck("Fairy\nBarfight\nPitfall\nTreasure\nFairy");
     string expectedOutputFilename("tests/noMonster_test_expected.txt");
     return GeneralGameSimulationTest(tmp_file, input, deck, expectedOutputFilename);
@@ -358,27 +358,28 @@ bool gangTest3(){
     string expectedOutputFilename("tests/gangTest3_test_expected.txt");
     return GeneralGameSimulationTest(tmp_file, input, deck, expectedOutputFilename);
 }
+
 /* ---------------------------------------------------------------------------------------------- */
 // --------------------------------       Main function          ------------------------------
 
 int main(){
-    run_test(cardsPrintsTest,"cardsPrintsTest");
-    run_test(playersPrintsTest,"playersPrintsTest");
-    run_test(testCard,"Deck creation test");
-    run_test(dragonDenTest,"Dragon Den simulation test");
-    run_test(goblinCaveTest,"Goblin Cave simulation test");
-    run_test(vampireLairTest,"Vampire Lair simulation test");
+//    run_test(cardsPrintsTest,"cardsPrintsTest");
+//    run_test(playersPrintsTest,"playersPrintsTest");
+//    run_test(testCard,"Deck creation test");
+//    run_test(dragonDenTest,"Dragon Den simulation test");
+//    run_test(goblinCaveTest,"Goblin Cave simulation test");
+//    run_test(vampireLairTest,"Vampire Lair simulation test");
     run_test(nonMostersTest,"Non monsters cards simulation test");
-    run_test(badFormatStartTest,"Bad format at start of file exception test");
-    run_test(badFormatTest,"Bad format exception test");
-    run_test(noFileTest,"File Doesnt exist exception test");
-    run_test(badSizeTest,"Bad size exception test");
-    run_test(roundLimitTest,"Round upper limit test");
-    run_test(allTenTest,"All reach lvl 10 test");
-    run_test(badPlayerInputTest,"Bad player input test");
-    run_test(merchantInputTest,"Merchant test");
-    run_test(gangTest1,"Gang Test 1");
-    run_test(gangTest2,"Gang Test 2");
-    run_test(gangTest3,"Gang Test 3");
+//    run_test(badFormatStartTest,"Bad format at start of file exception test");
+//    run_test(badFormatTest,"Bad format exception test");
+//    run_test(noFileTest,"File Doesnt exist exception test");
+//    run_test(badSizeTest,"Bad size exception test");
+//    run_test(roundLimitTest,"Round upper limit test");
+//    run_test(allTenTest,"All reach lvl 10 test");
+//    run_test(badPlayerInputTest,"Bad player input test");
+//    run_test(merchantInputTest,"Merchant test");
+//    run_test(gangTest1,"Gang Test 1");
+//    run_test(gangTest2,"Gang Test 2");
+//    run_test(gangTest3,"Gang Test 3");
     return 0;
 }

@@ -105,6 +105,10 @@ std::unique_ptr<Battle> Mtmchkin::chooseBattleCardByType(std::string &cardType, 
 
 bool Mtmchkin::isNumber(std::string str) {
     for(unsigned int i=0; i < str.size(); i++) {
+        if(i==0 && str[i] == MINUS_SIGN) {
+            continue;
+        }
+        
         if(str[i] < ZERO_DIGIT || str[i] > NINE_DIGIT) {
             return false;
         }
@@ -166,7 +170,7 @@ bool Mtmchkin::validatePlayerName(std::string &input, std::string &name) {
             return false;
         }
         
-        if((currentChar < A_LETTER_UPPERCASE || currentChar > Z_LETTER_UPPERCASE ) &&
+        if((currentChar < A_LETTER_UPPERCASE || currentChar > Z_LETTER_UPPERCASE) &&
            (currentChar < A_LETTER_LOWERCASE || currentChar > Z_LETTER_LOWERCASE)) {
             return false;
         }
@@ -245,26 +249,25 @@ Mtmchkin::Mtmchkin(const std::string filename):
 
     createDeck(deckFile, m_deck);
     
-    printEnterTeamSizeMessage();
-    
     std::string teamSizeString;
     
     int teamSize = 0;
     bool inputFlag = true;
     
-    // TODO: Weird. might change it.
+    // TODO: Weird. might change it. And also move it to another function
     while(inputFlag) {
+        printEnterTeamSizeMessage();
         try {
             std::getline(std::cin, teamSizeString);
             if(!isNumber(teamSizeString)) {
-                printInvalidInput();
+                printInvalidTeamSize();
                 continue;
             }
             
             teamSize = std::stoi(teamSizeString);
             
             if(teamSize < Mtmchkin::TEAM_MIN_SIZE || teamSize > Mtmchkin::TEAM_MAX_SIZE) {
-                printInvalidInput();
+                printInvalidTeamSize();
                 continue;
             }
         }

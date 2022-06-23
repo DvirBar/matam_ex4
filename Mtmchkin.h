@@ -85,6 +85,7 @@ private:
     static const int MIN_DECK_SIZE = 5;
     static const char ZERO_DIGIT = '0';
     static const char NINE_DIGIT = '9';
+    static const char MINUS_SIGN = '-';
     static const char A_LETTER_LOWERCASE = 'a';
     static const char Z_LETTER_LOWERCASE = 'z';
     static const char A_LETTER_UPPERCASE = 'A';

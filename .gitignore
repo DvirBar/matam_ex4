@@ -11,3 +11,6 @@ cmake-build-debug/*
 *.check_cache
 *.log
 mtmchkin
+test.cpp
+FileTester
+fileTests

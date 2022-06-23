@@ -3,7 +3,7 @@
 
 int main() {
     const int MAX_NUMBER_OF_ROUNDS = 100;
-    Mtmchkin game("deck.txt");
+    Mtmchkin game("tool/deck.txt");
     while(!game.isGameOver() && game.getNumberOfRounds() < MAX_NUMBER_OF_ROUNDS){
         game.playRound();
     }
