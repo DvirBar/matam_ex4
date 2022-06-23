@@ -1,13 +1,26 @@
+#include <iostream>
+#include <exception>
+
 #include "../Mtmchkin.h"
+#include "../Exception.h"
+
 
 
 int main() {
-    const int MAX_NUMBER_OF_ROUNDS = 100;
-    Mtmchkin game("deck.txt");
-    
-    while(!game.isGameOver() && game.getNumberOfRounds() < MAX_NUMBER_OF_ROUNDS) {
-        game.playRound();
+    try {
+        Mtmchkin game("deck.txt");
+        while(!game.isGameOver()) {
+            game.playRound();
+        }
+        
+        game.printLeaderBoard();
+    }
+    catch(const std::exception& error) {
+        std::cout << error.what() << std::endl;
+        return 0;
     }
     
-    game.printLeaderBoard();
+    return 0;
 }
+
+
